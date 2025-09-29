@@ -23,31 +23,31 @@ import { useCustomTheme } from '../context/ThemeContext';
 const galleryItems = [
   {
     type: 'video',
-    src: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit HB1.mp4',
+    src: '/media/gallery/ajit-hb1.mp4',
     title: '🎬 Birthday Party',
     description: 'Birthday celebration highlights with Ajit - Full of joy and magical moments! 🎉',
   },
   {
     type: 'video',
-    src: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit HB2.mp4',
+    src: '/media/gallery/ajit-hb2.mp4',
     title: '🎬 Ajit HB2.mp4',
     description: 'More birthday celebration moments filled with laughter and happiness! 🎊',
   },
   {
     type: 'image',
-    src: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit Image1.jpeg',
+    src: '/media/gallery/ajit-image-1.jpeg',
     title: '📸 Ajit - Our Founder',
     description: 'Meet Ajit, the passionate founder of Peeka Boo Events - Creating magical celebrations! 🎨',
   },
   {
     type: 'image',
-    src: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit Image2.jpeg',
+    src: '/media/gallery/ajit-image-2.jpeg',
     title: '📸 Event Setup Magic',
     description: 'Magical celebration setup and decorations that create unforgettable memories! ✨',
   },
   {
     type: 'image',
-    src: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit Image3.jpeg',
+    src: '/media/gallery/ajit-image-3.jpeg',
     title: '📸 Professional Management',
     description: 'Professional event management in action - Creating joy and celebration! 🎉',
   },

@@ -17,55 +17,55 @@ import { useBasket } from '../../context/BasketContext';
 const gameStalls = [
   {
     name: 'Buzz Wire',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Buzz Wire.jpeg',
+    image: '/media/game-stalls/buzz-wire.jpeg',
   },
   {
     name: 'Feed the Clown',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Feed the Clown.jpeg',
+    image: '/media/game-stalls/feed-the-clown.jpeg',
   },
   {
     name: 'Knock the Cans',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Knock the Cans.jpeg',
+    image: '/media/game-stalls/knock-the-cans.jpeg',
   },
   {
     name: 'Hit the Hammer',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Hit the Hammer.jpeg',
+    image: '/media/game-stalls/hit-the-hammer.jpeg',
   },
   {
     name: 'Balloon Shootings',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Balloon Shootings.jpeg',
+    image: '/media/game-stalls/balloon-shootings.jpeg',
   },
   {
     name: 'Basket Ball',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Basket Ball.jpeg',
+    image: '/media/game-stalls/basket-ball.jpeg',
   },
   {
     name: 'Ring Toss',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Ring Toss.jpeg',
+    image: '/media/game-stalls/ring-toss.jpeg',
   },
   {
     name: 'Twister',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Twister.jpeg',
+    image: '/media/game-stalls/twister.jpeg',
   },
   {
     name: 'Wheel of Fortune',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Wheel of Fortune.jpeg',
+    image: '/media/game-stalls/wheel-of-fortune.jpeg',
   },
   {
     name: 'Archery',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Archery.jpeg',
+    image: '/media/game-stalls/archery.jpeg',
   },
   {
     name: 'Bowling Alley',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Bowling alley.jpeg',
+    image: '/media/game-stalls/bowling-alley.jpeg',
   },
   {
     name: 'Dart Game',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Dart.jpeg',
+    image: '/media/game-stalls/dart.jpeg',
   },
   {
     name: 'Jenga',
-    image: 'https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Game Stalls/Jenga.jpeg',
+    image: '/media/game-stalls/jenga.jpeg',
   },
 ];
 
