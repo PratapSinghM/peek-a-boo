@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+import { BasketProvider } from './context/BasketContext';
+import { useCustomTheme } from './context/ThemeContext';
+import Navbar from './components/Layout/Navbar';
+import Footer from './components/Layout/Footer';
+import ThemeSelector from './components/UI/ThemeSelector';
+import BasketIcon from './components/Basket/BasketIcon';
+import HomePage from './pages/Home';
+import Events from './pages/Events';
+import BirthdayDetails from './pages/BirthdayDetails';
+import Artists from './pages/Artists';
+import Gallery from './pages/Gallery';
+import Contact from './pages/Contact';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { colors } = useCustomTheme();
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BasketProvider>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          background: colors.bodyGradient,
+          transition: 'all 0.3s ease',
+        }}
+      >
+        <Navbar />
+        <ThemeSelector />
+        <BasketIcon />
+        
+        <Box component="main" sx={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/birthday-details" element={<BirthdayDetails />} />
+            <Route path="/artists" element={<Artists />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* Catch all route - redirect to home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Box>
+        
+        <Footer />
+      </Box>
+    </BasketProvider>
+  );
 }
 
-export default App
+export default App;
