@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -164,17 +164,9 @@ const HeroSection = () => {
                   Plan an event
                 </Button>
                 <Button
-                  variant="outlined"
+                  variant="contained"
                   size="large"
                   onClick={() => navigate('/contact')}
-                  sx={{
-                    color: '#fff',
-                    borderColor: 'rgba(255,255,255,0.6)',
-                    '&:hover': {
-                      borderColor: '#fff',
-                      backgroundColor: 'rgba(255,255,255,0.12)',
-                    },
-                  }}
                 >
                   Book a discovery call
                 </Button>
@@ -228,7 +220,21 @@ const HeroSection = () => {
                   filter: 'blur(30px)',
                 }}
               />
-              <CardContent sx={{ position: 'relative' }}>
+              <CardContent sx={{ position: 'relative', display: 'flex', flexDirection: 'column' }}>
+                <Box
+                  component="img"
+                  src="/media/decoration-packages/platinum/platinum-07.jpg"
+                  alt="Signature birthday stage backdrop"
+                  loading="lazy"
+                  sx={{
+                    width: '100%',
+                    borderRadius: 3,
+                    objectFit: 'cover',
+                    height: isMdDown ? 220 : 260,
+                    mb: 3,
+                    boxShadow: '0 16px 38px rgba(15,23,43,0.12)',
+                  }}
+                />
                 <Typography variant="h5" sx={{ fontWeight: 700, mb: 2 }}>
                   Signature experiences
                 </Typography>
@@ -476,6 +482,96 @@ const EventShowcaseSection = () => {
   );
 };
 
+const MediaSpotlightSection = () => {
+  const theme = useTheme();
+  const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+  const { colors } = useCustomTheme();
+
+  return (
+    <Box
+      sx={{
+        py: { xs: 10, md: 14 },
+        backgroundColor: 'rgba(255,255,255,0.92)',
+      }}
+    >
+      <Container>
+        <Grid container spacing={{ xs: 4, md: 6 }} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Box
+              component="video"
+              src="/media/gallery/ajit-hb1.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls={false}
+              sx={{
+                width: '100%',
+                borderRadius: 4,
+                boxShadow: '0 24px 55px rgba(15,23,43,0.12)',
+              }}
+            />
+            <Typography
+              variant="subtitle1"
+              sx={{ mt: 2.5, color: colors.primaryDark, fontWeight: 600 }}
+            >
+              Spotlight: Galaxy explorer birthday
+            </Typography>
+            <Typography sx={{ color: '#5a4f6d', lineHeight: 1.7 }}>
+              Behind the scenes of our space-themed celebration, complete with astronaut tunnel, light choreography, and a confetti finale.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Stack spacing={2.5}>
+              <Box
+                component="img"
+                src="/media/decoration-packages/gold/gold-04.jpg"
+                alt="Balloon-filled birthday stage"
+                loading="lazy"
+                sx={{
+                  width: '100%',
+                  borderRadius: 4,
+                  objectFit: 'cover',
+                  boxShadow: '0 18px 45px rgba(15,23,43,0.08)',
+                  maxHeight: isMdDown ? 320 : 260,
+                }}
+              />
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <Box
+                  component="img"
+                  src="/media/gallery/ajit-image-1.jpeg"
+                  alt="Founder coordinating a celebration"
+                  loading="lazy"
+                  sx={{
+                    flex: 1,
+                    borderRadius: 4,
+                    objectFit: 'cover',
+                    height: isMdDown ? 200 : 180,
+                    boxShadow: '0 16px 38px rgba(15,23,43,0.12)',
+                  }}
+                />
+                <Box
+                  component="img"
+                  src="/media/decoration-packages/basic/basic-02.jpeg"
+                  alt="Kids enjoying a game stall"
+                  loading="lazy"
+                  sx={{
+                    flex: 1,
+                    borderRadius: 4,
+                    objectFit: 'cover',
+                    height: isMdDown ? 200 : 180,
+                    boxShadow: '0 16px 38px rgba(15,23,43,0.12)',
+                  }}
+                />
+              </Stack>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
 const TestimonialsSection = () => {
   const { colors } = useCustomTheme();
 
@@ -592,6 +688,7 @@ const HomePage = () => {
       <HeroSection />
       <HighlightsSection />
       <EventShowcaseSection />
+      <MediaSpotlightSection />
       <TestimonialsSection />
       <CallToActionSection />
     </Box>
@@ -599,4 +696,11 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
+
+
+
+
+
+
 

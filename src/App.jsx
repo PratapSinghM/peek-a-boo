@@ -22,15 +22,46 @@ function App() {
       <Box
         sx={{
           minHeight: '100vh',
-          background: colors.bodyGradient,
-          transition: 'all 0.3s ease',
+          display: 'flex',
+          flexDirection: 'column',
+          position: 'relative',
+          overflowX: 'hidden',
+          transition: 'background-color 0.3s ease',
+          '&::before': {
+            content: "''",
+            position: 'fixed',
+            width: 320,
+            height: 320,
+            borderRadius: '50%',
+            background: colors.badgeGradient,
+            top: -180,
+            right: -90,
+            filter: 'blur(110px)',
+            opacity: 0.45,
+            pointerEvents: 'none',
+            zIndex: 0,
+          },
+          '&::after': {
+            content: "''",
+            position: 'fixed',
+            width: 260,
+            height: 260,
+            borderRadius: '50%',
+            background: colors.badgeGradient,
+            bottom: -140,
+            left: -120,
+            filter: 'blur(120px)',
+            opacity: 0.35,
+            pointerEvents: 'none',
+            zIndex: 0,
+          },
         }}
       >
         <Navbar />
         <ThemeSelector />
         <BasketIcon />
-        
-        <Box component="main" sx={{ flex: 1 }}>
+
+        <Box component="main" sx={{ flex: 1, position: 'relative', zIndex: 1 }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/home" element={<Navigate to="/" replace />} />
@@ -39,11 +70,10 @@ function App() {
             <Route path="/artists" element={<Artists />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
-            {/* Catch all route - redirect to home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Box>
-        
+
         <Footer />
       </Box>
     </BasketProvider>

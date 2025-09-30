@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -8,93 +8,120 @@ import {
   Card,
   CardContent,
   Button,
-  useMediaQuery,
-  useTheme,
+  Stack,
+  Chip,
   Fade,
   Grow,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
-import { keyframes } from '@emotion/react';
 import { useCustomTheme } from '../context/ThemeContext';
 import PackageModal from '../components/Packages/PackageModal';
 
-const rainbowAnimation = keyframes`
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-`;
-
-const bounceAnimation = keyframes`
-  0%, 100% { transform: translateY(0) scale(1); }
-  25% { transform: translateY(-8px) scale(1.05); }
-  50% { transform: translateY(-12px) scale(1.1); }
-  75% { transform: translateY(-8px) scale(1.05); }
-`;
-
-const birthdayServices = [
+const serviceSections = [
   {
-    id: 1,
-    emoji: '🎨',
-    title: 'Decoration',
-    description: 'Beautiful themed decorations tailored to your preferences with vibrant colors and festive elements',
-    hasPackages: true,
-    packageType: 'decoration',
+    title: 'Party Essentials',
+    subtitle: 'Foundational elements that set the scene for unforgettable celebrations.',
+    items: [
+      {
+        id: 'decor',
+        emoji: '🎈',
+        title: 'Immersive Decor Styling',
+        description: "Statement backdrops, thematic installs, luxe balloon art, floral accents, and tailored tablescapes that mirror your child's personality.",
+        hasPackages: true,
+        packageType: 'decoration',
+        tags: ['Balloon couture', 'Photo-ready zones', 'Entrance arches'],
+        media: { type: 'image', src: '/media/decoration-packages/platinum/platinum-05.jpg', alt: 'Storybook stage with balloon arches' },
+      },
+      {
+        id: 'dj',
+        emoji: '🎧',
+        title: 'DJ & Dynamic Lighting',
+        description: 'Party anthems, surprise audio cues, moving heads, LED walls, cold pyro sparks, and controlled smoke for grand entries.',
+        hasPackages: true,
+        packageType: 'dj',
+        tags: ['Grand entries', 'Sound engineering', 'Dance-floor lighting'],
+        media: { type: 'image', src: '/media/decoration-packages/gold/gold-11.jpg', alt: 'DJ console with vibrant dance floor lighting' },
+      },
+      {
+        id: 'games',
+        emoji: '🎪',
+        title: 'Interactive Game Stalls',
+        description: 'Carnival counters, skill challenges, branded prizes, and cheerful hosts keeping every age group entertained.',
+        hasPackages: true,
+        packageType: 'games',
+        tags: ['Carnival vibes', 'Branded prizes', 'Host crew'],
+        media: { type: 'image', src: '/media/decoration-packages/gold/gold-06.jpg', alt: 'Children playing colourful midway games' },
+      },
+    ],
   },
   {
-    id: 2,
-    emoji: '🎵',
-    title: 'D.J with lights',
-    description: 'Professional DJ services with stunning light displays that create an amazing party atmosphere',
-    hasPackages: true,
-    packageType: 'dj',
+    title: 'Entertainment & Engagement',
+    subtitle: 'Curated acts and activities that leave kids wide-eyed and adults smiling.',
+    items: [
+      {
+        id: 'magic',
+        emoji: '🪄',
+        title: 'Magicians & Illusionists',
+        description: 'High-energy performers, mind-bending illusions, and warm storytelling that keeps audiences hooked.',
+        tags: ['Interactive sets', 'Stage-ready', 'Photo ops'],
+        media: { type: 'video', src: '/media/gallery/ajit-hb1.mp4', alt: 'Crowd reacting to a magic show' },
+      },
+      {
+        id: 'bubble',
+        emoji: '🫧',
+        title: 'Giant Bubble Show',
+        description: 'Shimmering bubbles, smoke-filled surprises, and kids stepping into larger-than-life bubble domes.',
+        tags: ['Glow-in-the-dark', 'Kids participation', 'Indoor safe'],
+        media: { type: 'image', src: '/media/decoration-packages/premium/premium-01.jpg', alt: 'Performer creating giant bubbles' },
+      },
+      {
+        id: 'activities',
+        emoji: '🎨',
+        title: 'Creative Activity Corners',
+        description: 'Face art, glitter tattoos, slime labs, craft bars, photobooths, and interactive storytelling corners.',
+        tags: ['Custom themes', 'Talent team', 'Take-home keepsakes'],
+        media: { type: 'image', src: '/media/decoration-packages/gold/gold-03.jpg', alt: 'Craft table with colourful supplies' },
+      },
+      {
+        id: 'anchor',
+        emoji: '🎤',
+        title: 'Professional MC & Host',
+        description: 'Warm anchors who connect with families, run games, manage timelines, and keep the energy upbeat.',
+        tags: ['Game flow', 'Guest engagement', 'Time management'],
+        media: { type: 'image', src: '/media/decoration-packages/platinum/platinum-10.jpg', alt: 'Event host engaging the crowd' },
+      },
+    ],
   },
   {
-    id: 3,
-    emoji: '🎯',
-    title: 'Game stalls',
-    description: 'Fun and engaging game stations for all ages that keep everyone entertained',
-    hasPackages: true,
-    packageType: 'games',
-  },
-  {
-    id: 4,
-    emoji: '🎪',
-    title: 'Activities',
-    description: 'Interactive activities designed to keep everyone engaged and create memorable moments',
-  },
-  {
-    id: 5,
-    emoji: '🎤',
-    title: 'Anchor',
-    description: 'Professional host to guide your event smoothly and keep the energy high',
-  },
-  {
-    id: 6,
-    emoji: '🎩',
-    title: 'Magic show',
-    description: 'Mesmerizing magic performances that amaze all ages and create wonder-filled moments',
-  },
-  {
-    id: 7,
-    emoji: '🫧',
-    title: 'Bubble show',
-    description: 'Enchanting bubble displays that create magical moments and delight children and adults',
-  },
-  {
-    id: 8,
-    emoji: '🎭',
-    title: 'Puppet Show',
-    description: 'Delightful puppet performances with engaging stories that captivate young audiences',
-  },
-  {
-    id: 9,
-    emoji: '❄️',
-    title: 'Special entry with dry ice',
-    description: 'Dramatic entrance with mesmerizing dry ice effects that make the birthday star feel special',
-  },
-  {
-    id: 10,
-    emoji: '🎁',
-    title: 'Return gifts',
-    description: 'Thoughtfully curated return gifts that guests will treasure as beautiful memories',
+    title: 'Wow Moments & Memories',
+    subtitle: 'Signature experiences that guarantee goosebumps, gasps, and shareable photos.',
+    items: [
+      {
+        id: 'entry',
+        emoji: '🚪',
+        title: 'Signature Entrances',
+        description: 'Dry ice clouds, spotlight runs, confetti bursts, LED tunnels, and thematic chariots to introduce the birthday star.',
+        tags: ['Dry ice', 'Confetti blast', 'Spotlight cues'],
+        media: { type: 'image', src: '/media/decoration-packages/gold/gold-09.jpg', alt: 'Grand birthday entry with dry ice' },
+      },
+      {
+        id: 'gifts',
+        emoji: '🎁',
+        title: 'Personalised Return Hampers',
+        description: 'Theme-coordinated keepsakes, interactive goodies, and eco-friendly packaging curated to delight guests.',
+        tags: ['Custom tags', 'Age perfect', 'Eco options'],
+        media: { type: 'image', src: '/media/decoration-packages/premium/premium-02.jpg', alt: 'Curated hamper display' },
+      },
+      {
+        id: 'memories',
+        emoji: '📸',
+        title: 'Memory Capture',
+        description: 'Professional photography, cinematic reels, live streaming, and instant prints to relive the magic.',
+        tags: ['Highlight reels', 'Same-day edits', 'Backdrops'],
+        media: { type: 'image', src: '/media/gallery/ajit-image-2.jpeg', alt: 'Photographer capturing a celebration' },
+      },
+    ],
   },
 ];
 
@@ -114,193 +141,197 @@ const BirthdayDetails = () => {
   };
 
   return (
-    <Box
-      sx={{
-        background: colors.cardGradient,
-        minHeight: '100vh',
-        py: 6,
-      }}
-    >
+    <Box sx={{ background: colors.cardGradient, py: { xs: 8, md: 10 } }}>
       <Container maxWidth="lg">
-        <Fade in timeout={1000}>
-          <Typography
-            variant="h2"
-            sx={{
-              textAlign: 'center',
-              mb: 3,
-              color: colors.primary,
-              fontSize: isMobile ? '2rem' : '3rem',
-              fontWeight: 700,
-            }}
-          >
-            🎂 Birthday Party Services
-          </Typography>
-        </Fade>
-
-        <Fade in timeout={1200}>
-          <Typography
-            variant="h6"
-            sx={{
-              textAlign: 'center',
-              mb: 6,
-              color: '#666',
-              fontSize: isMobile ? '1rem' : '1.2rem',
-            }}
-          >
-            Complete birthday celebration packages to make your special day absolutely unforgettable! ✨
-          </Typography>
-        </Fade>
-
-        <Grid container spacing={3}>
-          {birthdayServices.map((service, index) => (
-            <Grid item xs={12} sm={6} md={4} key={service.id}>
-              <Grow in timeout={1000 + index * 100}>
-                <Card
-                  onClick={() => handleServiceClick(service)}
-                  sx={{
-                    background: colors.cardGradient,
-                    border: `2px solid ${colors.primary}`,
-                    borderRadius: '20px',
-                    p: 2,
-                    cursor: service.hasPackages ? 'pointer' : 'default',
-                    transition: 'all 0.3s ease',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    '&:hover': {
-                      transform: 'translateY(-5px)',
-                      boxShadow: `0 12px 30px rgba(255, 105, 180, 0.25)`,
-                    },
-                    '&::before': {
-                      content: '""',
-                      position: 'absolute',
-                      top: -3,
-                      left: -3,
-                      right: -3,
-                      bottom: -3,
-                      background: `linear-gradient(45deg, ${colors.primary}, ${colors.accent}, ${colors.success}, ${colors.info}, ${colors.secondary}, ${colors.primary})`,
-                      backgroundSize: '400% 400%',
-                      borderRadius: '20px',
-                      zIndex: -1,
-                      animation: `${rainbowAnimation} 8s ease-in-out infinite`,
-                    },
-                    '&::after': {
-                      content: '"🎂"',
-                      position: 'absolute',
-                      top: 15,
-                      right: 20,
-                      fontSize: '1.8rem',
-                      animation: `${bounceAnimation} 1.5s ease-in-out infinite`,
-                      filter: 'drop-shadow(2px 2px 4px rgba(255, 105, 180, 0.3))',
-                    },
-                  }}
-                >
-                  <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                      <Box
-                        sx={{
-                          background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`,
-                          borderRadius: '15px',
-                          p: 1,
-                          mr: 2,
-                          boxShadow: '0 4px 15px rgba(255, 105, 180, 0.3)',
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            color: 'white',
-                            fontSize: '2rem',
-                          }}
-                        >
-                          {service.emoji}
-                        </Typography>
-                      </Box>
-                      <Typography
-                        variant="h6"
-                        sx={{
-                          fontSize: '1.3rem',
-                          fontWeight: 700,
-                          color: colors.primaryDark,
-                          textShadow: '1px 1px 2px rgba(255, 105, 180, 0.2)',
-                        }}
-                      >
-                        {service.id}. {service.title}
-                      </Typography>
-                    </Box>
-
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        color: '#444',
-                        lineHeight: 1.6,
-                        fontWeight: 500,
-                        pl: 1,
-                        borderLeft: `3px solid rgba(255, 105, 180, 0.3)`,
-                        background: 'rgba(255, 255, 255, 0.4)',
-                        p: 2,
-                        borderRadius: '15px',
-                      }}
-                    >
-                      {service.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grow>
-            </Grid>
-          ))}
-        </Grid>
-
-        <Fade in timeout={2000}>
-          <Box sx={{ textAlign: 'center', mt: 6 }}>
-            <Card
+        <Fade in timeout={800}>
+          <Stack spacing={2.5} textAlign="center" sx={{ mb: 6 }}>
+            <Typography
+              variant="h2"
               sx={{
-                background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
-                color: 'white',
-                p: 4,
-                borderRadius: '20px',
+                fontWeight: 800,
+                color: colors.primaryDark,
+                fontSize: isMobile ? '2.2rem' : '3.1rem',
               }}
             >
-              <Typography
-                variant="h4"
-                gutterBottom
-                sx={{
-                  fontSize: isMobile ? '1.5rem' : '2rem',
-                  mb: 2,
-                }}
-              >
-                🌟 Complete Birthday Packages Available
-              </Typography>
-              
-              <Typography
-                variant="body1"
-                sx={{
-                  mb: 3,
-                  lineHeight: 1.8,
-                  fontSize: isMobile ? '1rem' : '1.1rem',
-                }}
-              >
-                Mix and match services or choose our complete packages for a stress-free celebration. 
-                Every birthday deserves to be special! ✨
-              </Typography>
-              
-              <Button
-                variant="contained"
-                size="large"
-                onClick={() => navigate('/contact')}
-                sx={{
-                  background: 'rgba(255,255,255,0.2)',
-                  color: 'white',
-                  fontSize: isMobile ? '1rem' : '1.2rem',
-                  px: isMobile ? 3 : 4,
-                  py: isMobile ? 1.5 : 2,
-                  '&:hover': {
-                    background: 'rgba(255,255,255,0.3)',
-                  },
-                }}
-              >
-                🎂 Plan Your Birthday Party Now! 🎂
-              </Button>
-            </Card>
-          </Box>
+              Birthday experiences with heart
+            </Typography>
+            <Typography sx={{ maxWidth: 760, mx: 'auto', color: '#554A6A', lineHeight: 1.8 }}>
+              Whether you dream of a whimsical first birthday or a tween-friendly dance battle, our planners choreograph every moment so you can stay present for the giggles, gasps, and happy tears.
+            </Typography>
+          </Stack>
+        </Fade>
+
+        <Stack spacing={{ xs: 6, md: 8 }}>
+          {serviceSections.map((section, sectionIndex) => (
+            <Box key={section.title}>
+              <Fade in timeout={900 + sectionIndex * 200}>
+                <Stack spacing={1.5} sx={{ mb: 4 }}>
+                  <Typography variant="h4" sx={{ fontWeight: 700, color: colors.primaryDark }}>
+                    {section.title}
+                  </Typography>
+                  <Typography sx={{ color: '#5a4f6d', maxWidth: 720 }}>
+                    {section.subtitle}
+                  </Typography>
+                </Stack>
+              </Fade>
+
+              <Grid container spacing={{ xs: 3, md: 4 }}>
+                {section.items.map((service, index) => (
+                  <Grid item xs={12} md={6} key={service.id} sx={{ display: 'flex' }}>
+                    <Grow in timeout={1000 + index * 150}>
+                      <Card
+                        onClick={() => handleServiceClick(service)}
+                        sx={{
+                          flex: 1,
+                          height: '100%',
+                          borderRadius: 4,
+                          cursor: service.hasPackages ? 'pointer' : 'default',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          border: service.hasPackages
+                            ? `1px solid ${colors.primary}55`
+                            : '1px solid rgba(255,255,255,0.7)',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                          '&:hover': {
+                            transform: service.hasPackages ? 'translateY(-6px)' : 'translateY(-3px)',
+                            boxShadow: '0 22px 45px rgba(15,23,43,0.12)',
+                          },
+                        }}
+                      >
+                        {service.media && (
+                          <Box
+                            component={service.media.type === 'video' ? 'video' : 'img'}
+                            src={service.media.src}
+                            alt={service.media.alt}
+                            autoPlay={service.media.type === 'video'}
+                            muted={service.media.type === 'video'}
+                            loop={service.media.type === 'video'}
+                            playsInline={service.media.type === 'video'}
+                            controls={false}
+                            loading="lazy"
+                            sx={{
+                              width: '100%',
+                              aspectRatio: '16 / 10',
+                              objectFit: 'cover',
+                            }}
+                          />
+                        )}
+
+                        <CardContent sx={{ p: { xs: 3, md: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                          <Stack spacing={2} sx={{ flexGrow: 1 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                              <Box
+                                sx={{
+                                  fontSize: '2.25rem',
+                                  backgroundColor: 'rgba(255,255,255,0.8)',
+                                  borderRadius: '18px',
+                                  padding: '6px 14px',
+                                  boxShadow: '0 10px 25px rgba(15,23,43,0.08)',
+                                }}
+                              >
+                                {service.emoji}
+                              </Box>
+                              <Typography variant="h5" sx={{ fontWeight: 700, color: colors.primaryDark }}>
+                                {service.title}
+                              </Typography>
+                            </Box>
+
+                            <Typography sx={{ color: '#4c405e', lineHeight: 1.7 }}>
+                              {service.description}
+                            </Typography>
+
+                            <Stack direction="row" spacing={1} flexWrap="wrap" rowGap={1}>
+                              {service.tags?.map((tag) => (
+                                <Chip
+                                  key={tag}
+                                  label={tag}
+                                  sx={{
+                                    backgroundColor: 'rgba(255,255,255,0.7)',
+                                    color: colors.primaryDark,
+                                    fontWeight: 600,
+                                  }}
+                                />
+                              ))}
+                            </Stack>
+
+                            {service.hasPackages && (
+                                                            <Typography
+                                variant="subtitle2"
+                                sx={{
+                                  mt: 1,
+                                  fontWeight: 600,
+                                  color: colors.primaryDark,
+                                  display: 'inline-flex',
+                                  alignItems: 'center',
+                                  gap: 0.5,
+                                }}
+                              >
+                                Tap to view curated packages
+                                <Box component="span" aria-hidden="true" sx={{ fontSize: '1.1em', lineHeight: 1 }}>
+                                  &rarr;
+                                </Box>
+                              </Typography>
+                            )}
+                          </Stack>
+                        </CardContent>
+                      </Card>
+                    </Grow>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          ))}
+        </Stack>
+
+        <Fade in timeout={1500}>
+          <Card
+            sx={{
+              mt: { xs: 8, md: 10 },
+              borderRadius: 5,
+              background: `linear-gradient(135deg, ${colors.primaryDark} 0%, ${colors.primary} 45%, ${colors.accent} 100%)`,
+              color: 'white',
+              textAlign: 'center',
+              boxShadow: '0 24px 55px rgba(15, 23, 43, 0.18)',
+            }}
+          >
+            <CardContent sx={{ p: { xs: 4, md: 6 } }}>
+              <Stack spacing={2.5} alignItems="center">
+                <Typography variant="h4" sx={{ fontWeight: 800, fontSize: isMobile ? '1.8rem' : '2.4rem' }}>
+                  Bundle services for a stress-free celebration
+                </Typography>
+                <Typography sx={{ maxWidth: 660, lineHeight: 1.9, color: 'rgba(255,255,255,0.85)' }}>
+                  Mix-and-match offerings or choose a curated bundle. We handle vendor coordination, timeline scripting, and on-ground execution while you enjoy the applause.
+                </Typography>
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => navigate('/contact')}
+                    sx={{ px: 4, py: 1.4, backgroundColor: '#ffffff', color: colors.primaryDark, '&:hover': { backgroundColor: 'rgba(255,255,255,0.9)' } }}
+                  >
+                    Let's design your party
+                  </Button>
+                  <Button
+                    size="large"
+                    variant="outlined"
+                    onClick={() => setModalOpen(true)}
+                    sx={{
+                      color: '#fff',
+                      borderColor: 'rgba(255,255,255,0.7)',
+                      '&:hover': {
+                        borderColor: '#fff',
+                        backgroundColor: 'rgba(255,255,255,0.15)',
+                      },
+                    }}
+                  >
+                    Preview package menus
+                  </Button>
+                </Stack>
+              </Stack>
+            </CardContent>
+          </Card>
         </Fade>
       </Container>
 
@@ -314,3 +345,5 @@ const BirthdayDetails = () => {
 };
 
 export default BirthdayDetails;
+
+

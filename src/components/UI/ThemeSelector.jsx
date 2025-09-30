@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import {
   Box,
   Fab,
@@ -8,22 +8,14 @@ import {
   Tooltip,
   useMediaQuery,
   useTheme,
+  Stack,
 } from '@mui/material';
 import PaletteIcon from '@mui/icons-material/Palette';
 import { useCustomTheme } from '../../context/ThemeContext';
 
-const themeOptions = [
-  { key: 'pink', label: '👧 Girl', color: '#FF69B4', tooltip: 'Pink Paradise' },
-  { key: 'blue', label: '👦 Boy', color: '#4169E1', tooltip: 'Ocean Blue' },
-  { key: 'purple', label: '💒 Wedding', color: '#9370DB', tooltip: 'Royal Purple' },
-  { key: 'green', label: '🏢 Corporate', color: '#32CD32', tooltip: 'Nature Green' },
-  { key: 'orange', label: '🤝 Get-together', color: '#FF8C00', tooltip: 'Sunset Orange' },
-  { key: 'yellow', label: '☀️ Sunshine', color: '#FFD700', tooltip: 'Sunshine Yellow' },
-];
-
 const ThemeSelector = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { currentTheme, changeTheme, colors } = useCustomTheme();
+  const { currentTheme, changeTheme, themes, colors } = useCustomTheme();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -35,37 +27,32 @@ const ThemeSelector = () => {
     setAnchorEl(null);
   };
 
-  const handleThemeChange = (themeKey) => {
-    changeTheme(themeKey);
-    handleClose();
-  };
-
   const open = Boolean(anchorEl);
 
   return (
     <>
-      <Tooltip title="Choose Theme" placement="left">
+      <Tooltip title="Switch colour mood" placement="left">
         <Fab
           onClick={handleClick}
           sx={{
             position: 'fixed',
-            top: isMobile ? 70 : 80,
-            right: isMobile ? 10 : 20,
+            top: isMobile ? 76 : 90,
+            right: isMobile ? 12 : 24,
             zIndex: 2000,
-            width: isMobile ? 45 : 50,
-            height: isMobile ? 45 : 50,
+            width: isMobile ? 48 : 52,
+            height: isMobile ? 48 : 52,
             background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`,
-            color: 'white',
-            border: '2px solid white',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
-            transition: 'all 0.3s ease',
+            color: '#FFFFFF',
+            border: '2px solid rgba(255,255,255,0.8)',
+            boxShadow: '0 12px 28px rgba(0,0,0,0.15)',
+            transition: 'transform 0.25s ease, box-shadow 0.25s ease',
             '&:hover': {
-              transform: 'scale(1.1)',
-              boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
+              transform: 'translateY(-2px) scale(1.05)',
+              boxShadow: '0 16px 36px rgba(0,0,0,0.2)',
             },
           }}
         >
-          <PaletteIcon sx={{ fontSize: isMobile ? '1.3rem' : '1.5rem' }} />
+          <PaletteIcon sx={{ fontSize: isMobile ? '1.4rem' : '1.6rem' }} />
         </Fab>
       </Tooltip>
 
@@ -83,76 +70,106 @@ const ThemeSelector = () => {
         }}
         sx={{
           '& .MuiPopover-paper': {
-            borderRadius: '15px',
-            p: 2,
-            border: `2px solid ${colors.primary}`,
-            boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
-            minWidth: isMobile ? 160 : 200,
+            borderRadius: 20,
+            padding: theme.spacing(2.5),
+            border: `1px solid ${colors.primary}44`,
+            boxShadow: '0 20px 45px rgba(15, 23, 43, 0.15)',
+            minWidth: isMobile ? 220 : 280,
+            backdropFilter: 'blur(10px)',
           },
         }}
       >
-        <Typography
-          variant="subtitle2"
-          sx={{
-            textAlign: 'center',
-            mb: 1,
-            color: colors.primaryDark,
-            fontWeight: 600,
-            fontSize: isMobile ? '0.8rem' : '0.9rem',
-          }}
-        >
-          🎨 Choose Theme
-        </Typography>
-        
-        <Grid container spacing={1}>
-          {themeOptions.map((option) => (
-            <Grid item xs={6} key={option.key}>
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: 0.5,
-                }}
-              >
-                <Tooltip title={option.tooltip} placement="top">
-                  <Box
-                    onClick={() => handleThemeChange(option.key)}
-                    sx={{
-                      width: isMobile ? 25 : 35,
-                      height: isMobile ? 25 : 35,
-                      borderRadius: '50%',
-                      background: `linear-gradient(135deg, ${option.color}, ${option.color}dd)`,
-                      border: currentTheme === option.key 
-                        ? `3px solid ${colors.primary}` 
-                        : '3px solid white',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-                      transform: currentTheme === option.key ? 'scale(1.15)' : 'scale(1)',
-                      '&:hover': {
-                        transform: 'scale(1.1)',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-                      },
-                    }}
-                  />
-                </Tooltip>
-                <Typography
-                  variant="caption"
-                  sx={{
-                    textAlign: 'center',
-                    fontSize: isMobile ? '0.5rem' : '0.6rem',
-                    fontWeight: 600,
-                    color: colors.primaryDark,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  {option.label}
-                </Typography>
-              </Box>
-            </Grid>
-          ))}
-        </Grid>
+        <Stack spacing={1.5}>
+          <Box>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                textAlign: 'center',
+                color: colors.primaryDark,
+                fontWeight: 700,
+                letterSpacing: '0.6px',
+              }}
+            >
+              Choose your celebration palette
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                display: 'block',
+                textAlign: 'center',
+                color: '#666',
+                mt: 0.5,
+              }}
+            >
+              Instantly restyle the party vibe across the site.
+            </Typography>
+          </Box>
+
+          <Grid container spacing={1.5}>
+            {Object.entries(themes).map(([key, preset]) => {
+              const swatches = preset.swatch?.length
+                ? [...preset.swatch]
+                : [preset.primary, preset.secondary, preset.accent].filter(Boolean);
+              if (swatches.length === 1 && preset.primaryDark) {
+                swatches.push(preset.primaryDark);
+              }
+              const gradient = swatches.length > 1
+                ? `linear-gradient(135deg, ${swatches.join(', ')})`
+                : swatches[0];
+
+              return (
+                <Grid item xs={6} key={key}>
+                  <Tooltip title={preset.label} placement="top">
+                    <Box
+                      onClick={() => {
+                        changeTheme(key);
+                        handleClose();
+                      }}
+                      sx={{
+                        cursor: 'pointer',
+                        borderRadius: '18px',
+                        padding: 1.2,
+                        border: currentTheme === key
+                          ? `2px solid ${colors.primary}`
+                          : '2px solid transparent',
+                        backgroundColor: 'rgba(255,255,255,0.85)',
+                        boxShadow: currentTheme === key
+                          ? '0 10px 24px rgba(0,0,0,0.18)'
+                          : '0 6px 18px rgba(0,0,0,0.12)',
+                        transition: 'all 0.25s ease',
+                        '&:hover': {
+                          transform: 'translateY(-3px)',
+                          boxShadow: '0 12px 28px rgba(0,0,0,0.18)',
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          height: 32,
+                          borderRadius: '12px',
+                          background: gradient,
+                          border: '1px solid rgba(255,255,255,0.6)',
+                        }}
+                      />
+                      <Typography
+                        variant="caption"
+                        sx={{
+                          display: 'block',
+                          textAlign: 'center',
+                          fontWeight: 600,
+                          mt: 1,
+                          color: '#4b4164',
+                        }}
+                      >
+                        {preset.label}
+                      </Typography>
+                    </Box>
+                  </Tooltip>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Stack>
       </Popover>
     </>
   );

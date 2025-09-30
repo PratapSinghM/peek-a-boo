@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -100,7 +100,7 @@ const Artists = () => {
 
       <Grid container spacing={4}>
         {artists.map((artist, index) => (
-          <Grid item xs={12} sm={6} md={4} key={artist.name}>
+          <Grid item xs={12} sm={6} md={4} key={artist.name} sx={{ display: 'flex' }}>
             <Grow in timeout={1000 + index * 200}>
               <Card
                 sx={{
@@ -109,6 +109,8 @@ const Artists = () => {
                   borderRadius: '20px',
                   textAlign: 'center',
                   height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
                   position: 'relative',
                   overflow: 'hidden',
                   transition: 'all 0.3s ease',
@@ -132,7 +134,7 @@ const Artists = () => {
                   },
                 }}
               >
-                <CardContent sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <CardContent sx={{ p: 3, flex: 1, display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 2 }}>
                   <Avatar
                     sx={{
                       width: isMobile ? 80 : 120,
@@ -177,7 +179,6 @@ const Artists = () => {
                       background: 'rgba(0,0,0,0.05)',
                       p: 2,
                       borderRadius: '10px',
-                      mt: 'auto',
                     }}
                   >
                     <Typography
@@ -190,7 +191,7 @@ const Artists = () => {
                     >
                       Specialties:
                     </Typography>
-                    <Typography variant="body2" sx={{ color: '#555' }}>
+                    <Typography variant="body2" sx={{ color: '#555', lineHeight: 1.6 }}>
                       {artist.specialties.map((specialty, idx) => (
                         <span key={idx}>
                           • {specialty}
@@ -238,8 +239,7 @@ const Artists = () => {
                 fontSize: isMobile ? '1rem' : '1.1rem',
               }}
             >
-              Each of our artists brings years of experience and genuine passion for entertainment. 
-              Mix and match performers or book complete packages for unforgettable celebrations! 🎊
+              Each of our artists brings years of experience and genuine passion for entertainment. Mix and match performers or book complete packages for unforgettable celebrations!
             </Typography>
             
             <Button
@@ -252,7 +252,7 @@ const Artists = () => {
                 py: isMobile ? 1.5 : 2,
               }}
             >
-              🎭 Book Our Artists Now! 🎭
+              🎉 Book Our Artists Now
             </Button>
           </Card>
         </Box>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import {
   Box,
   Container,
@@ -11,48 +11,53 @@ import {
   useTheme,
   Fade,
   Grow,
+  Stack,
 } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
+import CakeIcon from '@mui/icons-material/Cake';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { useCustomTheme } from '../context/ThemeContext';
 
 const contactMethods = [
   {
     icon: <PhoneIcon sx={{ fontSize: '3rem' }} />,
-    title: 'Call Us',
+    title: 'Call the studio',
     contact: '+91 98211 48631',
-    subtitle: 'Available 9 AM - 9 PM',
+    subtitle: 'Available 9:00 AM - 9:00 PM IST',
     action: 'tel:+919821148631',
-    buttonText: '📞 Call Now',
-    color: 'linear-gradient(135deg, #FF69B4 0%, #9370DB 50%, #4169E1 100%)',
+    buttonText: 'Call Peeka Boo',
+    gradient: 'linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%)',
   },
   {
     icon: <WhatsAppIcon sx={{ fontSize: '3rem' }} />,
-    title: 'WhatsApp',
+    title: 'Chat on WhatsApp',
     contact: '+91 98211 48631',
-    subtitle: 'Quick responses guaranteed',
-    action: 'https://wa.me/919821148631?text=Hi%20Peeka%20Boo!%20I%27d%20like%20to%20plan%20an%20event',
-    buttonText: '💬 Chat on WhatsApp',
-    color: 'linear-gradient(135deg, #25D366 0%, #128C7E 50%, #075E54 100%)',
+    subtitle: 'Quick replies with sample decks',
+    action: 'https://wa.me/919821148631?text=Hi%20Peeka%20Boo!%20Let%27s%20plan%20an%20event',
+    buttonText: 'Say hello on WhatsApp',
+    gradient: 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
     external: true,
   },
   {
     icon: <EmailIcon sx={{ fontSize: '3rem' }} />,
-    title: 'Email Us',
+    title: 'Write to us',
     contact: 'hello@peekabooevents.com',
-    subtitle: 'Detailed planning support',
+    subtitle: 'Share briefs, mood boards, or RFPs',
     action: 'mailto:hello@peekabooevents.com?subject=Event%20Planning%20Inquiry',
-    buttonText: '✉️ Send Email',
-    color: 'linear-gradient(135deg, #EA4335 0%, #FBBC05 50%, #34A853 100%)',
+    buttonText: 'Send an email',
+    gradient: 'linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%)',
   },
 ];
 
-const eventTypes = [
-  { emoji: '🎂', name: 'Birthday Parties' },
-  { emoji: '👰', name: 'Weddings' },
-  { emoji: '💕', name: 'Anniversaries' },
-  { emoji: '🤝', name: 'Get-togethers' },
+const celebrationTypes = [
+  { label: 'Birthdays', icon: <CakeIcon /> },
+  { label: 'Anniversaries', icon: <FavoriteIcon /> },
+  { label: 'Social soirees', icon: <Diversity3Icon /> },
+  { label: 'Corporate moments', icon: <EmojiEventsIcon /> },
 ];
 
 const Contact = () => {
@@ -62,120 +67,87 @@ const Contact = () => {
 
   const handleContactClick = (method) => {
     if (method.external) {
-      window.open(method.action, '_blank');
+      window.open(method.action, '_blank', 'noopener,noreferrer');
     } else {
       window.location.href = method.action;
     }
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Fade in timeout={1000}>
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: 3,
-            color: colors.primaryDark,
-            fontSize: isMobile ? '2rem' : '3rem',
-            fontWeight: 700,
-          }}
-        >
-          📞 Get in Touch
-        </Typography>
+    <Container maxWidth="lg" sx={{ py: { xs: 8, md: 10 } }}>
+      <Fade in timeout={800}>
+        <Stack spacing={2} textAlign="center" sx={{ mb: 6 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              color: colors.primaryDark,
+              fontWeight: 800,
+              fontSize: isMobile ? '2.2rem' : '3.1rem',
+            }}
+          >
+            Let's start planning your next celebration
+          </Typography>
+          <Typography sx={{ maxWidth: 720, mx: 'auto', color: '#5a4f6d', lineHeight: 1.8 }}>
+            Tell us about the milestone, guest vibe, and wish list. We will respond within one business day with ideas and a discovery call slot.
+          </Typography>
+        </Stack>
       </Fade>
 
-      <Fade in timeout={1200}>
-        <Typography
-          variant="h6"
-          sx={{
-            textAlign: 'center',
-            mb: 6,
-            color: '#666',
-            fontSize: isMobile ? '1rem' : '1.2rem',
-          }}
-        >
-          Ready to plan your perfect celebration? Let's make it happen together! ✨
-        </Typography>
-      </Fade>
-
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 3, md: 4 }}>
         {contactMethods.map((method, index) => (
-          <Grid item xs={12} md={4} key={method.title}>
-            <Grow in timeout={1000 + index * 200}>
+          <Grid item xs={12} md={4} key={method.title} sx={{ display: 'flex' }}>
+            <Grow in timeout={900 + index * 150}>
               <Card
                 sx={{
-                  background: method.color,
-                  color: 'white',
-                  textAlign: 'center',
-                  minHeight: 320,
+                  flex: 1,
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 15px 35px rgba(0,0,0,0.2)',
-                  },
+                  background: method.gradient,
+                  color: '#1F1235',
+                  textAlign: 'center',
+                  borderRadius: 4,
+                  boxShadow: '0 20px 45px rgba(15,23,43,0.16)',
                 }}
               >
-                <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                  <Box sx={{ mb: 2 }}>
-                    {method.icon}
-                  </Box>
-                  
-                  <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{
-                      fontSize: isMobile ? '1.3rem' : '1.5rem',
-                      fontWeight: 700,
-                      mb: 2,
-                    }}
-                  >
-                    {method.title}
-                  </Typography>
-                  
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontSize: isMobile ? '1.1rem' : '1.3rem',
-                      fontWeight: 600,
-                      mb: 2,
-                      color: '#FFE4E1',
-                    }}
-                  >
-                    {method.contact}
-                  </Typography>
-                  
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      opacity: 0.9,
-                      mb: 3,
-                    }}
-                  >
-                    {method.subtitle}
-                  </Typography>
-                  
-                  <Button
-                    variant="contained"
-                    onClick={() => handleContactClick(method)}
-                    sx={{
-                      background: 'rgba(255,255,255,0.2)',
-                      color: 'white',
-                      borderRadius: '25px',
-                      px: 3,
-                      py: 1,
-                      '&:hover': {
-                        background: 'rgba(255,255,255,0.3)',
-                        transform: 'translateY(-2px)',
-                      },
-                    }}
-                  >
-                    {method.buttonText}
-                  </Button>
+                <CardContent
+                  sx={{
+                    p: { xs: 4, md: 4.5 },
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <Stack spacing={2.5} alignItems="center" sx={{ flexGrow: 1, width: '100%' }}>
+                    <Box sx={{ color: '#402A64' }}>{method.icon}</Box>
+                    <Stack spacing={0.5} sx={{ flexGrow: 1 }}>
+                      <Typography variant="h5" sx={{ fontWeight: 700 }}>
+                        {method.title}
+                      </Typography>
+                      <Typography sx={{ fontWeight: 600 }}>{method.contact}</Typography>
+                      <Typography sx={{ color: '#4B3A63', lineHeight: 1.6 }}>
+                        {method.subtitle}
+                      </Typography>
+                    </Stack>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleContactClick(method)}
+                      sx={{
+                        borderRadius: 999,
+                        px: 3,
+                        py: 1.2,
+                        boxShadow: '0 14px 32px rgba(15,23,43,0.18)',
+                        mt: 'auto',
+                        backgroundColor: '#ffffff',
+                        color: '#1F1235',
+                        '&:hover': {
+                          backgroundColor: 'rgba(255,255,255,0.9)',
+                          color: '#1F1235',
+                        },
+                      }}
+                    >
+                      {method.buttonText}
+                    </Button>
+                  </Stack>
                 </CardContent>
               </Card>
             </Grow>
@@ -183,85 +155,60 @@ const Contact = () => {
         ))}
       </Grid>
 
-      <Fade in timeout={2000}>
-        <Box sx={{ mt: 6 }}>
-          <Card
-            sx={{
-              background: colors.cardGradient,
-              p: 4,
-              borderRadius: '20px',
-            }}
-          >
-            <Typography
-              variant="h3"
-              gutterBottom
-              sx={{
-                textAlign: 'center',
-                color: colors.primaryDark,
-                fontSize: isMobile ? '1.5rem' : '2.2rem',
-                fontWeight: 700,
-                mb: 3,
-              }}
-            >
-              🎉 Let's Plan Something Amazing!
-            </Typography>
-            
-            <Typography
-              variant="body1"
-              sx={{
-                textAlign: 'center',
-                mb: 4,
-                color: '#666',
-                lineHeight: 1.8,
-                fontSize: isMobile ? '1rem' : '1.1rem',
-              }}
-            >
-              Whether it's an intimate gathering or a grand celebration, Peeka Boo is here to make your 
-              event dreams come true. Get in touch and let's start planning your perfect celebration! 🌟
-            </Typography>
-            
-            <Grid container spacing={2} sx={{ mt: 2 }}>
-              {eventTypes.map((event, index) => (
-                <Grid item xs={6} sm={3} key={event.name}>
-                  <Grow in timeout={2500 + index * 100}>
-                    <Box
-                      sx={{
-                        textAlign: 'center',
-                        p: 2,
-                        background: 'rgba(255,255,255,0.5)',
-                        borderRadius: '15px',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'translateY(-3px)',
-                          boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
-                        },
-                      }}
-                    >
-                      <Typography
+      <Fade in timeout={1400}>
+        <Card
+          sx={{
+            mt: { xs: 8, md: 9 },
+            borderRadius: 5,
+            background: colors.cardGradient,
+            boxShadow: '0 24px 55px rgba(15,23,43,0.12)',
+          }}
+        >
+          <CardContent sx={{ p: { xs: 4, md: 6 } }}>
+            <Stack spacing={3} alignItems="center" textAlign="center">
+              <Typography
+                variant="h4"
+                sx={{
+                  color: colors.primaryDark,
+                  fontWeight: 800,
+                  fontSize: isMobile ? '1.8rem' : '2.4rem',
+                }}
+              >
+                We specialise in
+              </Typography>
+
+              <Grid container spacing={2} justifyContent="center">
+                {celebrationTypes.map((item, index) => (
+                  <Grid item xs={6} sm={3} key={item.label}>
+                    <Grow in timeout={1500 + index * 120}>
+                      <Box
                         sx={{
-                          fontSize: isMobile ? '2rem' : '2.5rem',
-                          mb: 1,
-                        }}
-                      >
-                        {event.emoji}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{
+                          background: 'rgba(255,255,255,0.7)',
+                          borderRadius: 4,
+                          p: 2,
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          gap: 1,
                           fontWeight: 600,
                           color: colors.primaryDark,
-                          fontSize: isMobile ? '0.8rem' : '1rem',
+                          minHeight: 120,
                         }}
                       >
-                        {event.name}
-                      </Typography>
-                    </Box>
-                  </Grow>
-                </Grid>
-              ))}
-            </Grid>
-          </Card>
-        </Box>
+                        <Box sx={{ fontSize: isMobile ? '2.2rem' : '2.5rem' }}>{item.icon}</Box>
+                        <Typography variant="body2">{item.label}</Typography>
+                      </Box>
+                    </Grow>
+                  </Grid>
+                ))}
+              </Grid>
+
+              <Typography sx={{ maxWidth: 640, color: '#5a4f6d', lineHeight: 1.8 }}>
+                New idea on your mind? We love building fresh experiences from scratch. Share your brief, Pinterest board, or even a quick bullet list and we will take it forward.
+              </Typography>
+            </Stack>
+          </CardContent>
+        </Card>
       </Fade>
     </Container>
   );

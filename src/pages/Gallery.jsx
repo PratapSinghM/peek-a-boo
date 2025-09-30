@@ -15,6 +15,7 @@ import {
   useTheme,
   Fade,
   Grow,
+  Stack,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
@@ -24,32 +25,32 @@ const galleryItems = [
   {
     type: 'video',
     src: '/media/gallery/ajit-hb1.mp4',
-    title: '🎬 Birthday Party',
-    description: 'Birthday celebration highlights with Ajit - Full of joy and magical moments! 🎉',
+    title: 'Galaxy explorer birthday (Age 6)',
+    description: 'From astronaut welcome tunnels to surprise confetti showers, this party was packed with cosmic joy.',
   },
   {
     type: 'video',
     src: '/media/gallery/ajit-hb2.mp4',
-    title: '🎬 Ajit HB2.mp4',
-    description: 'More birthday celebration moments filled with laughter and happiness! 🎊',
+    title: 'Carnival under the stars',
+    description: 'An outdoor birthday with game stalls, live caricature artists, and a dramatic pyro finale.',
   },
   {
     type: 'image',
     src: '/media/gallery/ajit-image-1.jpeg',
-    title: '📸 Ajit - Our Founder',
-    description: 'Meet Ajit, the passionate founder of Peeka Boo Events - Creating magical celebrations! 🎨',
+    title: 'Ajit, our founder in action',
+    description: 'Hands-on supervision to ensure every timeline cue and vendor handshake lands perfectly.',
   },
   {
     type: 'image',
     src: '/media/gallery/ajit-image-2.jpeg',
-    title: '📸 Event Setup Magic',
-    description: 'Magical celebration setup and decorations that create unforgettable memories! ✨',
+    title: 'Curating the stage reveal',
+    description: 'Final lighting and prop checks moments before guests walk in for the grand surprise.',
   },
   {
     type: 'image',
     src: '/media/gallery/ajit-image-3.jpeg',
-    title: '📸 Professional Management',
-    description: 'Professional event management in action - Creating joy and celebration! 🎉',
+    title: 'Backstage coordination',
+    description: 'Our core team orchestrating entertainers, decor artists, and hospitality to keep the celebration flowing.',
   },
 ];
 
@@ -105,9 +106,9 @@ const MediaViewer = ({ open, onClose, item }) => {
             controls
             autoPlay
             sx={{
-              maxWidth: '90%',
-              maxHeight: '90%',
-              borderRadius: '10px',
+              maxWidth: isMobile ? '100%' : '75vw',
+              maxHeight: '85vh',
+              borderRadius: '16px',
             }}
           >
             <source src={item.src} type="video/mp4" />
@@ -119,10 +120,10 @@ const MediaViewer = ({ open, onClose, item }) => {
             src={item.src}
             alt={item.title}
             sx={{
-              maxWidth: '90%',
-              maxHeight: '90%',
+              maxWidth: isMobile ? '95%' : '75vw',
+              maxHeight: '85vh',
               objectFit: 'contain',
-              borderRadius: '10px',
+              borderRadius: '16px',
             }}
           />
         )}
@@ -132,14 +133,14 @@ const MediaViewer = ({ open, onClose, item }) => {
 };
 
 const Gallery = () => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [viewerOpen, setViewerOpen] = useState(false);
   const navigate = useNavigate();
   const { colors } = useCustomTheme();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [viewerOpen, setViewerOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  const handleItemClick = (item) => {
+  const handleOpenViewer = (item) => {
     setSelectedItem(item);
     setViewerOpen(true);
   };
@@ -150,147 +151,93 @@ const Gallery = () => {
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Fade in timeout={1000}>
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: 3,
-            color: colors.primaryDark,
-            fontSize: isMobile ? '2rem' : '3rem',
-            fontWeight: 700,
-          }}
-        >
-          📸 Our Event Gallery
-        </Typography>
+    <Container maxWidth="lg" sx={{ py: { xs: 8, md: 10 } }}>
+      <Fade in timeout={800}>
+        <Stack spacing={2.5} textAlign="center" sx={{ mb: 6 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              color: colors.primaryDark,
+              fontSize: isMobile ? '2.2rem' : '3.1rem',
+            }}
+          >
+            A peek into the parties we curate
+          </Typography>
+          <Typography sx={{ maxWidth: 760, mx: 'auto', color: '#5a4f6d', lineHeight: 1.8 }}>
+            Every frame captures handcrafted moments, happy faces, and the behind-the-scenes coordination that keeps your celebration on cue.
+          </Typography>
+        </Stack>
       </Fade>
 
-      <Fade in timeout={1200}>
-        <Typography
-          variant="h6"
-          sx={{
-            textAlign: 'center',
-            mb: 6,
-            color: '#666',
-            fontSize: isMobile ? '1rem' : '1.2rem',
-          }}
-        >
-          Capturing the joy and magic of our celebrations ✨
-        </Typography>
-      </Fade>
-
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 3, md: 4 }}>
         {galleryItems.map((item, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <Grow in timeout={1000 + index * 200}>
+          <Grid item xs={12} sm={6} md={4} key={item.src}>
+            <Grow in timeout={900 + index * 150}>
               <Card
-                onClick={() => handleItemClick(item)}
+                onClick={() => handleOpenViewer(item)}
                 sx={{
+                  height: '100%',
+                  borderRadius: 4,
                   cursor: 'pointer',
-                  borderRadius: '20px',
+                  position: 'relative',
                   overflow: 'hidden',
-                  background: 'white',
-                  transition: 'all 0.3s ease',
+                  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
                   '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 15px 35px rgba(0,0,0,0.15)',
+                    transform: 'translateY(-6px)',
+                    boxShadow: '0 20px 45px rgba(15,23,43,0.12)',
                   },
                 }}
               >
-                <Box
-                  sx={{
-                    position: 'relative',
-                    width: '100%',
-                    height: 250,
-                    overflow: 'hidden',
-                    background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {item.type === 'video' ? (
-                    <>
-                      <Box
-                        component="video"
-                        muted
-                        loop
-                        preload="metadata"
-                        sx={{
-                          width: '100%',
-                          height: '100%',
-                          objectFit: 'cover',
-                        }}
-                        onMouseEnter={(e) => e.target.play()}
-                        onMouseLeave={(e) => e.target.pause()}
-                      >
-                        <source src={item.src} type="video/mp4" />
-                      </Box>
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          top: '50%',
-                          left: '50%',
-                          transform: 'translate(-50%, -50%)',
-                          backgroundColor: 'rgba(0,0,0,0.7)',
-                          borderRadius: '50%',
-                          width: 60,
-                          height: 60,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          color: 'white',
-                          opacity: 0.8,
-                          transition: 'all 0.3s ease',
-                          '&:hover': {
-                            opacity: 1,
-                            transform: 'translate(-50%, -50%) scale(1.1)',
-                          },
-                        }}
-                      >
-                        <PlayArrowIcon sx={{ fontSize: '2rem', ml: 0.5 }} />
-                      </Box>
-                    </>
-                  ) : (
+                <Box sx={{ position: 'relative', paddingTop: '62%', overflow: 'hidden' }}>
+                  <Box
+                    component={item.type === 'video' ? 'video' : 'img'}
+                    src={item.src}
+                    alt={item.title}
+                    controls={false}
+                    muted
+                    autoPlay={false}
+                    loop={false}
+                    sx={{
+                      position: 'absolute',
+                      inset: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.3s ease',
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+
+                  {item.type === 'video' && (
                     <Box
-                      component="img"
-                      src={item.src}
-                      alt={item.title}
                       sx={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.3s ease',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        backgroundColor: 'rgba(0,0,0,0.65)',
+                        borderRadius: '50%',
+                        width: 64,
+                        height: 64,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#fff',
                       }}
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.parentNode.innerHTML = '<div style="color: white; font-size: 2rem; display: flex; align-items: center; justify-content: center; height: 100%; flex-direction: column; gap: 10px;"><div>🎊</div><div style="font-size: 1rem;">Image Loading...</div></div>';
-                      }}
-                    />
+                    >
+                      <PlayArrowIcon sx={{ fontSize: '2.1rem', ml: 0.3 }} />
+                    </Box>
                   )}
                 </Box>
 
-                <CardContent sx={{ p: 2 }}>
-                  <Typography
-                    variant="h6"
-                    gutterBottom
-                    sx={{
-                      color: colors.primaryDark,
-                      fontWeight: 700,
-                      fontSize: isMobile ? '1rem' : '1.1rem',
-                    }}
-                  >
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, color: colors.primaryDark, mb: 1 }}>
                     {item.title}
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: '#666',
-                      fontSize: '0.9rem',
-                      lineHeight: 1.5,
-                    }}
-                  >
+                  <Typography sx={{ color: '#5a4f6d', fontSize: '0.95rem', lineHeight: 1.6 }}>
                     {item.description}
                   </Typography>
                 </CardContent>
@@ -300,62 +247,44 @@ const Gallery = () => {
         ))}
       </Grid>
 
-      <Fade in timeout={2000}>
-        <Box sx={{ textAlign: 'center', mt: 6 }}>
-          <Card
-            sx={{
-              background: colors.cardGradient,
-              p: 4,
-              borderRadius: '20px',
-            }}
-          >
-            <Typography
-              variant="h4"
-              gutterBottom
-              sx={{
-                color: colors.primaryDark,
-                fontSize: isMobile ? '1.5rem' : '2rem',
-                fontWeight: 700,
-                mb: 2,
-              }}
-            >
-              📱 Share Your Magical Moments
-            </Typography>
-            
-            <Typography
-              variant="body1"
-              sx={{
-                mb: 3,
-                color: '#666',
-                lineHeight: 1.8,
-                fontSize: isMobile ? '1rem' : '1.1rem',
-              }}
-            >
-              We love seeing the joy on our clients' faces! Share your event photos with us and 
-              let's celebrate together. Tag us on social media to be featured in our gallery! 🌈
-            </Typography>
-            
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => navigate('/contact')}
-              sx={{
-                fontSize: isMobile ? '1rem' : '1.2rem',
-                px: isMobile ? 3 : 4,
-                py: isMobile ? 1.5 : 2,
-              }}
-            >
-              🎊 Get Your Event Featured! 🎊
-            </Button>
-          </Card>
-        </Box>
+      <Fade in timeout={1600}>
+        <Card
+          sx={{
+            mt: { xs: 7, md: 9 },
+            borderRadius: 5,
+            background: colors.cardGradient,
+            boxShadow: '0 24px 55px rgba(15,23,43,0.12)',
+          }}
+        >
+          <CardContent sx={{ p: { xs: 4, md: 5 } }}>
+            <Stack spacing={2.5} alignItems="center" textAlign="center">
+              <Typography
+                variant="h4"
+                sx={{
+                  color: colors.primaryDark,
+                  fontWeight: 800,
+                  fontSize: isMobile ? '1.8rem' : '2.3rem',
+                }}
+              >
+                Want your celebration spotlighted next?
+              </Typography>
+              <Typography sx={{ maxWidth: 620, color: '#5a4f6d', lineHeight: 1.8 }}>
+                Share your Peeka Boo event photographs or invite us to capture the next one. We love featuring joyful stories from our client family.
+              </Typography>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={() => navigate('/contact')}
+                sx={{ px: 4, py: 1.4 }}
+              >
+                Tell us about your event
+              </Button>
+            </Stack>
+          </CardContent>
+        </Card>
       </Fade>
 
-      <MediaViewer
-        open={viewerOpen}
-        onClose={handleCloseViewer}
-        item={selectedItem}
-      />
+      <MediaViewer open={viewerOpen} onClose={handleCloseViewer} item={selectedItem} />
     </Container>
   );
 };

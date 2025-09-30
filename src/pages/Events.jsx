@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Box,
@@ -12,35 +12,61 @@ import {
   useTheme,
   Fade,
   Grow,
+  Stack,
+  Chip,
 } from '@mui/material';
 import { useCustomTheme } from '../context/ThemeContext';
 
 const eventTypes = [
   {
-    title: 'Birthday Parties',
+    title: 'Showstopper Birthdays',
     emoji: '🎂',
-    description: 'Magical celebrations for all ages with decorations, entertainment, and unforgettable memories!',
-    color: 'linear-gradient(135deg, #FF69B4 0%, #FF1493 100%)',
+    highlight: 'Themed styling, interactive zones, spotlight entries, and wow-worthy cakes.',
+    gradient: 'linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%)',
     link: '/birthday-details',
-    buttonText: '🎁 View Birthday Services',
+    cta: 'Explore birthday magic',
+    tags: ['Balloon art', 'Grand entries', 'Return gifts'],
+    media: {
+      type: 'image',
+      src: '/media/decoration-packages/platinum/platinum-07.jpg',
+      alt: 'Plush pink and gold birthday stage styling',
+    },
   },
   {
-    title: 'Get-togethers',
-    emoji: '🤝',
-    description: 'Warm and welcoming gatherings that bring family and friends closer together!',
-    color: 'linear-gradient(135deg, #32CD32 0%, #228B22 100%)',
+    title: 'Intimate Soirees',
+    emoji: '🥂',
+    highlight: 'Chic dinner parties, milestone anniversaries, and elegant proposals with curated styling.',
+    gradient: 'linear-gradient(135deg, #A18CD1 0%, #FBC2EB 100%)',
+    tags: ['Tablescapes', 'Live music', 'Mood lighting'],
+    media: {
+      type: 'image',
+      src: '/media/decoration-packages/gold/gold-05.jpg',
+      alt: 'Romantic anniversary dinner table with candlelight',
+    },
   },
   {
-    title: 'Anniversaries',
-    emoji: '💕',
-    description: 'Romantic and elegant celebrations of love and milestone moments!',
-    color: 'linear-gradient(135deg, #FF8C00 0%, #FFA500 100%)',
+    title: 'Community Gatherings',
+    emoji: '🎈',
+    highlight: 'Festivals, society days, school fairs, and family carnivals that feel effortlessly hosted.',
+    gradient: 'linear-gradient(135deg, #FAD961 0%, #F76B1C 100%)',
+    tags: ['Themed zones', 'Activity stalls', 'Stage flow'],
+    media: {
+      type: 'image',
+      src: '/media/decoration-packages/premium/premium-02.jpg',
+      alt: 'Outdoor carnival setup with colourful canopies',
+    },
   },
   {
-    title: 'Weddings',
-    emoji: '👰',
-    description: 'Grand celebrations with traditional Indian customs and modern elegance!',
-    color: 'linear-gradient(135deg, #9370DB 0%, #8A2BE2 100%)',
+    title: 'Corporate Celebrations',
+    emoji: '🏆',
+    highlight: 'Team days, product launches, and award nights that blend precision with personality.',
+    gradient: 'linear-gradient(135deg, #43CEA2 0%, #185A9D 100%)',
+    tags: ['Show direction', 'AV & tech', 'Branded gifting'],
+    media: {
+      type: 'video',
+      src: '/media/gallery/ajit-hb2.mp4',
+      alt: 'Corporate celebration highlight reel',
+    },
   },
 ];
 
@@ -51,95 +77,125 @@ const Events = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
-    <Container maxWidth="lg" sx={{ py: 6 }}>
-      <Fade in timeout={1000}>
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: 6,
-            color: colors.primaryDark,
-            fontSize: isMobile ? '2rem' : '3rem',
-            fontWeight: 700,
-          }}
-        >
-          🎊 Our Magical Event Services
-        </Typography>
+    <Container maxWidth="lg" sx={{ py: { xs: 8, md: 10 } }}>
+      <Fade in timeout={800}>
+        <Stack spacing={2.5} alignItems="center" textAlign="center" sx={{ mb: 6 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              color: colors.primaryDark,
+              fontSize: isMobile ? '2.2rem' : '3.2rem',
+              fontWeight: 800,
+            }}
+          >
+            Celebrations that feel custom-crafted
+          </Typography>
+          <Typography sx={{ maxWidth: 720, color: '#5a4f6d', lineHeight: 1.8 }}>
+            From jaw-dropping balloon installs to seamless show flow, our planners obsess over every detail so you can stay in the moment with your favourite people.
+          </Typography>
+        </Stack>
       </Fade>
 
-      <Grid container spacing={4} sx={{ mt: 2 }}>
+      <Grid container spacing={{ xs: 4, md: 5 }}>
         {eventTypes.map((event, index) => (
-          <Grid item xs={12} md={6} key={event.title}>
-            <Grow in timeout={1000 + index * 200}>
+          <Grid item xs={12} md={6} key={event.title} sx={{ display: 'flex' }}>
+            <Grow in timeout={900 + index * 200}>
               <Card
                 sx={{
-                  background: event.color,
-                  color: 'white',
-                  textAlign: 'center',
-                  minHeight: 280,
+                  flex: 1,
+                  height: '100%',
+                  background: event.gradient,
+                  color: '#1F1235',
+                  border: 'none',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: 4,
+                  boxShadow: '0 18px 45px rgba(15, 23, 43, 0.12)',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  transition: 'all 0.3s ease',
-                  cursor: 'pointer',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 15px 35px rgba(0,0,0,0.2)',
-                  },
                 }}
               >
-                <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                  <Typography
-                    sx={{
-                      fontSize: '4rem',
-                      mb: 2,
-                      display: 'block',
-                    }}
-                  >
-                    {event.emoji}
-                  </Typography>
-                  
-                  <Typography
-                    variant="h4"
-                    gutterBottom
-                    sx={{
-                      mb: 2,
-                      fontSize: isMobile ? '1.3rem' : '1.5rem',
-                      fontWeight: 700,
-                    }}
-                  >
-                    {event.title}
-                  </Typography>
-                  
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      lineHeight: 1.8,
-                      mb: 3,
-                      opacity: 0.95,
-                    }}
-                  >
-                    {event.description}
-                  </Typography>
-                  
+                <Box
+                  component={event.media.type === 'video' ? 'video' : 'img'}
+                  src={event.media.src}
+                  alt={event.media.alt}
+                  autoPlay={event.media.type === 'video'}
+                  muted={event.media.type === 'video'}
+                  loop={event.media.type === 'video'}
+                  playsInline={event.media.type === 'video'}
+                  controls={false}
+                  loading="lazy"
+                  sx={{
+                    width: '100%',
+                    aspectRatio: '16 / 10',
+                    objectFit: 'cover',
+                    borderTopLeftRadius: 4,
+                    borderTopRightRadius: 4,
+                  }}
+                />
+
+                <CardContent
+                  sx={{
+                    p: { xs: 3, md: 4 },
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flexGrow: 1,
+                    gap: 2.5,
+                  }}
+                >
+                  <Stack spacing={2} sx={{ flexGrow: 1 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                      <Box
+                        sx={{
+                          fontSize: '2.5rem',
+                          backgroundColor: 'rgba(255,255,255,0.4)',
+                          borderRadius: '18px',
+                          padding: '8px 14px',
+                          boxShadow: '0 8px 20px rgba(15,23,43,0.12)',
+                        }}
+                      >
+                        {event.emoji}
+                      </Box>
+                      <Typography variant="h4" sx={{ fontWeight: 700 }}>
+                        {event.title}
+                      </Typography>
+                    </Box>
+
+                    <Typography sx={{ fontSize: '1rem', lineHeight: 1.7, color: '#2D2242', fontWeight: 500 }}>
+                      {event.highlight}
+                    </Typography>
+
+                    <Stack direction="row" spacing={1} flexWrap="wrap" rowGap={1}>
+                      {event.tags.map((tag) => (
+                        <Chip
+                          key={tag}
+                          label={tag}
+                          sx={{
+                            backgroundColor: 'rgba(255,255,255,0.65)',
+                            color: '#2D2242',
+                            fontWeight: 600,
+                          }}
+                        />
+                      ))}
+                    </Stack>
+                  </Stack>
+
                   {event.link && (
-                    <Button
-                      variant="contained"
-                      onClick={() => navigate(event.link)}
-                      sx={{
-                        background: 'rgba(255,255,255,0.2)',
-                        color: 'white',
-                        '&:hover': {
-                          background: 'rgba(255,255,255,0.3)',
-                          transform: 'translateY(-2px)',
-                        },
-                        borderRadius: '25px',
-                        px: 3,
-                        py: 1,
-                      }}
-                    >
-                      {event.buttonText}
-                    </Button>
+                    <Box>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => navigate(event.link)}
+                        sx={{
+                          borderRadius: 999,
+                          fontSize: '0.95rem',
+                          px: 3,
+                          py: 1.2,
+                        }}
+                      >
+                        {event.cta}
+                      </Button>
+                    </Box>
                   )}
                 </CardContent>
               </Card>
@@ -148,31 +204,38 @@ const Events = () => {
         ))}
       </Grid>
 
-      <Fade in timeout={2000}>
-        <Box sx={{ textAlign: 'center', mt: 6 }}>
+      <Fade in timeout={1600}>
+        <Box
+          sx={{
+            textAlign: 'center',
+            mt: { xs: 7, md: 9 },
+            background: colors.cardGradient,
+            borderRadius: 6,
+            p: { xs: 4, md: 6 },
+            boxShadow: '0 18px 45px rgba(15, 23, 43, 0.08)',
+          }}
+        >
           <Typography
             variant="h4"
-            gutterBottom
             sx={{
-              mb: 3,
+              mb: 2,
               color: colors.primaryDark,
-              fontSize: isMobile ? '1.5rem' : '2rem',
+              fontWeight: 800,
+              fontSize: isMobile ? '1.8rem' : '2.4rem',
             }}
           >
-            🌟 Ready to Plan Your Perfect Event? 🌟
+            Ready to plan a celebration everyone remembers?
           </Typography>
-          
+          <Typography sx={{ maxWidth: 640, mx: 'auto', color: '#5a4f6d', lineHeight: 1.8, mb: 3 }}>
+            Tell us about your milestone and we will share an inspiration deck with mood boards, budgets, and an event flow within three business days.
+          </Typography>
           <Button
             variant="contained"
             size="large"
             onClick={() => navigate('/contact')}
-            sx={{
-              fontSize: isMobile ? '1rem' : '1.2rem',
-              px: isMobile ? 3 : 4,
-              py: isMobile ? 1.5 : 2,
-            }}
+            sx={{ px: 4, py: 1.6 }}
           >
-            🎊 Get in Touch Today! 🎊
+            Start planning with us
           </Button>
         </Box>
       </Fade>
