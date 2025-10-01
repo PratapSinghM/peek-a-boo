@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
-  base: "/peek-a-boo/",
+  base: "/",
   build: {
     outDir: "docs",
     emptyOutDir: true,
