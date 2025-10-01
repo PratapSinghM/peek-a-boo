@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peeka Boo | Events that Spark Joy</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎉</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="AjitEM006_07_styles.css">
+</head>
+<body>
+    <!-- Basket Icon -->
+    <div class="basket-icon" onclick="toggleBasket()">
+        🛒
+        <div class="basket-count" id="basketCount" style="display: none;">0</div>
+    </div>
+
+    <!-- Theme Selector - Collapsible -->
+    <div class="theme-selector">
+        <div class="theme-toggle" onclick="toggleThemePanel()" title="Choose Theme">
+            🎨
+        </div>
+        <div class="theme-panel" id="themePanel">
+            <h4>🎨 Choose Theme</h4>
+            <div class="theme-options">
+                <div class="theme-container">
+                    <div class="theme-option theme-pink" data-theme="default" title="Pink Paradise"></div>
+                    <div class="theme-label">👧 Girl</div>
+                </div>
+                <div class="theme-container">
+                    <div class="theme-option theme-blue" data-theme="blue" title="Ocean Blue"></div>
+                    <div class="theme-label">👦 Boy</div>
+                </div>
+                <div class="theme-container">
+                    <div class="theme-option theme-purple active" data-theme="purple" title="Royal Purple"></div>
+                    <div class="theme-label">💒 Wedding</div>
+                </div>
+                <div class="theme-container">
+                    <div class="theme-option theme-green" data-theme="green" title="Nature Green"></div>
+                    <div class="theme-label">🏢 Corporate</div>
+                </div>
+                <div class="theme-container">
+                    <div class="theme-option theme-orange" data-theme="orange" title="Sunset Orange"></div>
+                    <div class="theme-label">🤝 Get-together</div>
+                </div>
+                <div class="theme-container">
+                    <div class="theme-option theme-yellow" data-theme="yellow" title="Sunshine Yellow"></div>
+                    <div class="theme-label">☀️ Sunshine</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#home" class="navbar-brand">🎉 Peeka Boo</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" id="nav-home">Home</a></li>
+                <li><a href="#events" id="nav-events">Events</a></li>
+                <li><a href="#birthday-details" id="nav-birthday">Birthday Services</a></li>
+                <li><a href="#artists" id="nav-artists">Our Artists</a></li>
+                <li><a href="#gallery" id="nav-gallery">Gallery</a></li>
+                <li><a href="#contact" id="nav-contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Page -->
+        <div id="home-page" class="page">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>🎉 Welcome to Peeka Boo Events</h1>
+                    <h2>"Let's Celebrate Moments that Matter"</h2>
+                    <a href="#events" class="btn">✨ Explore Our Magical Events ✨</a>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="grid grid-2">
+                        <div>
+                            <h2>🌟 About Ajit & Peeka Boo</h2>
+                            <p style="font-size: 1.2rem; margin-bottom: 1.5rem; color: #555; line-height: 1.8;">
+                                Welcome to our vibrant world of celebrations! Founded by Ajit, Peeka Boo is a passionate, 
+                                family-run Indian events company dedicated to creating magical moments that last a lifetime.
+                            </p>
+                            <p style="margin-bottom: 1.5rem; color: #666; line-height: 1.8;">
+                                From intimate birthday parties to grand weddings, from joyful get-togethers to milestone anniversaries, 
+                                we bring the authentic spirit of Indian celebrations to every event. Our team understands that each 
+                                occasion is unique and deserves personalized attention.
+                            </p>
+                            <p style="color: #666; line-height: 1.8;">
+                                With years of experience and a deep love for bringing people together, we specialize in creating 
+                                unforgettable experiences filled with color, music, joy, and the warmth of Indian hospitality.
+                            </p>
+                        </div>
+                        <div class="card" style="background: var(--card-gradient);">
+                            <h3 style="color: var(--primary-dark); text-align: center; margin-bottom: 2rem;">🌟 Why Choose Peeka Boo?</h3>
+                            <div>
+                                <div style="display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <span style="font-size: 2rem; margin-right: 1rem;">🎨</span>
+                                    <span style="font-weight: 600; color: #555;">Creative & Colorful Decorations</span>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <span style="font-size: 2rem; margin-right: 1rem;">👨‍👩‍👧‍👦</span>
+                                    <span style="font-weight: 600; color: #555;">Family-Run with Personal Touch</span>
+                                </div>
+                                <div style="display: flex; align-items: center; margin-bottom: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <span style="font-size: 2rem; margin-right: 1rem;">🎵</span>
+                                    <span style="font-weight: 600; color: #555;">Traditional & Modern Entertainment</span>
+                                </div>
+                                <div style="display: flex; align-items: center; padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <span style="font-size: 2rem; margin-right: 1rem;">💝</span>
+                                    <span style="font-weight: 600; color: #555;">End-to-End Event Management</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Events Page -->
+        <div id="events-page" class="page hidden">
+            <section class="section">
+                <div class="container">
+                    <h1 class="text-center" style="font-size: 3rem; margin-bottom: 3rem;">🎊 Our Magical Event Services</h1>
+                    
+                    <div class="grid grid-2" style="margin-top: 2rem;">
+                        <div class="card event-card" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);">
+                            <div class="big-emoji" style="margin-bottom: 1.5rem;">🎂</div>
+                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Birthday Parties</h3>
+                            <p style="line-height: 1.8; margin-bottom: 2rem;">Magical celebrations for all ages with decorations, entertainment, and unforgettable memories!</p>
+                            <a href="#birthday-details" class="btn" style="background: rgba(255,255,255,0.2);">
+                                🎁 View Birthday Services
+                            </a>
+                        </div>
+                        
+                        <div class="card event-card" style="background: linear-gradient(135deg, var(--success-color) 0%, #228B22 100%);">
+                            <div class="big-emoji" style="margin-bottom: 1.5rem;">🤝</div>
+                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Get-togethers</h3>
+                            <p style="line-height: 1.8;">Warm and welcoming gatherings that bring family and friends closer together!</p>
+                        </div>
+                        
+                        <div class="card event-card" style="background: linear-gradient(135deg, var(--accent-color) 0%, #FFA500 100%);">
+                            <div class="big-emoji" style="margin-bottom: 1.5rem;">💕</div>
+                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Anniversaries</h3>
+                            <p style="line-height: 1.8;">Romantic and elegant celebrations of love and milestone moments!</p>
+                        </div>
+                        
+                        <div class="card event-card" style="background: linear-gradient(135deg, var(--secondary-color) 0%, #8A2BE2 100%);">
+                            <div class="big-emoji" style="margin-bottom: 1.5rem;">👰</div>
+                            <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Weddings</h3>
+                            <p style="line-height: 1.8;">Grand celebrations with traditional Indian customs and modern elegance!</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 3rem;">
+                        <h3 style="font-size: 2rem; margin-bottom: 2rem;">🌟 Ready to Plan Your Perfect Event? 🌟</h3>
+                        <a href="#contact" class="btn" style="font-size: 1.2rem; padding: 18px 36px;">
+                            🎊 Get in Touch Today! 🎊
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Birthday Details Page -->
+        <div id="birthday-details-page" class="page hidden birthday-theme">
+            <section class="section">
+                <div class="container">
+                    <h1 class="text-center birthday-primary" style="font-size: 3rem; margin-bottom: 2rem;">🎂 Birthday Party Services</h1>
+                    <p class="text-center" style="font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                        Complete birthday celebration packages to make your special day absolutely unforgettable! ✨
+                    </p>
+                    
+                    <div class="grid grid-3">
+                        <div class="birthday-card birthday-service" onclick="showPackages('decoration')">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎨</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">1. Decoration</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Beautiful themed decorations tailored to your preferences with vibrant colors and festive elements</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service" onclick="showPackages('dj')">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎵</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">2. D.J with lights</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Professional DJ services with stunning light displays that create an amazing party atmosphere</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service" onclick="showPackages('games')">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji rotating-game-images" style="color: white; font-size: 2rem;">🎯</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">3. Game stalls</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Fun and engaging game stations for all ages that keep everyone entertained</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎪</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">4. Activities</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Interactive activities designed to keep everyone engaged and create memorable moments</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎤</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">5. Anchor</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Professional host to guide your event smoothly and keep the energy high</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎩</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">6. Magic show</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Mesmerizing magic performances that amaze all ages and create wonder-filled moments</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🫧</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">7. Bubble show</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Enchanting bubble displays that create magical moments and delight children and adults</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎭</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">8. Puppet Show</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Delightful puppet performances with engaging stories that captivate young audiences</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">❄️</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">9. Special entry with dry ice</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Dramatic entrance with mesmerizing dry ice effects that make the birthday star feel special</p>
+                        </div>
+                        
+                        <div class="birthday-card birthday-service">
+                            <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 15px; padding: 8px; margin-right: 1.5rem; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);">
+                                    <span class="service-emoji" style="color: white; font-size: 2rem;">🎁</span>
+                                </div>
+                                <h4 style="font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); text-shadow: 1px 1px 2px rgba(255, 105, 180, 0.2);">10. Return gifts</h4>
+                            </div>
+                            <p style="color: #444; line-height: 1.6; font-weight: 500; padding-left: 10px; border-left: 3px solid rgba(255, 105, 180, 0.3); background: rgba(255, 255, 255, 0.4); padding: 15px; border-radius: 15px; margin-top: 10px;">Thoughtfully curated return gifts that guests will treasure as beautiful memories</p>
+                        </div> 
+                    </div>
+
+                    <div class="text-center" style="margin-top: 3rem;">
+                        <div class="card" style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 2.5rem;">
+                            <h3 style="color: white; font-size: 2rem; margin-bottom: 1.5rem;">🌟 Complete Birthday Packages Available</h3>
+                            <p style="margin: 1.5rem 0; line-height: 1.8; font-size: 1.1rem; color: white;">
+                                Mix and match services or choose our complete packages for a stress-free celebration. 
+                                Every birthday deserves to be special! ✨
+                            </p>
+                            <a href="#contact" class="btn" style="background: rgba(255,255,255,0.2); color: white;">
+                                🎂 Plan Your Birthday Party Now! 🎂
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Artists Page -->
+        <div id="artists-page" class="page hidden">
+            <section class="section">
+                <div class="container">
+                    <h1 class="text-center" style="font-size: 3rem; margin-bottom: 2rem;">🎭 Meet Our Talented Artists</h1>
+                    <p class="text-center" style="font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                        Our amazing team of performers who bring magic and joy to every celebration! ✨
+                    </p>
+                    
+                    <div class="grid grid-3">
+                        <div class="card artist-card">
+                            <div class="artist-image">🎩</div>
+                            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Rajesh the Magician</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Master of illusion with 10+ years of experience. Specializes in close-up magic, 
+                                stage performances, and interactive shows that leave audiences spellbound.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 10px;">
+                                <strong style="color: var(--primary-dark);">Specialties:</strong>
+                                <br>• Card Magic • Mind Reading • Stage Illusions • Kids Magic
+                            </div>
+                        </div>
+                        
+                        <div class="card artist-card">
+                            <div class="artist-image">🎭</div>
+                            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Priya the Puppeteer</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Creative storyteller who brings puppets to life! Expert in traditional hand puppets, 
+                                marionettes, and interactive puppet shows for children.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 10px;">
+                                <strong style="color: var(--primary-dark);">Specialties:</strong>
+                                <br>• Hand Puppets • Story Telling • Character Voices • Educational Shows
+                            </div>
+                        </div>
+                        
+                        <div class="card artist-card">
+                            <div class="artist-image">🎤</div>
+                            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Arjun the Anchor</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Energetic host and MC who keeps the party alive! Expert in crowd engagement, 
+                                games coordination, and maintaining high energy throughout events.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 10px;">
+                                <strong style="color: var(--primary-dark);">Specialties:</strong>
+                                <br>• Event Hosting • Games & Activities • Crowd Interaction • Bilingual MC
+                            </div>
+                        </div>
+                        
+                        <div class="card artist-card">
+                            <div class="artist-image">🫧</div>
+                            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Kavya the Bubble Artist</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Creates magical bubble experiences that mesmerize all ages. Specializes in giant bubbles, 
+                                bubble art, and interactive bubble workshops.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 10px;">
+                                <strong style="color: var(--primary-dark);">Specialties:</strong>
+                                <br>• Giant Bubbles • Bubble Art • Workshops • Interactive Shows
+                            </div>
+                        </div>
+                        
+                        <div class="card artist-card">
+                            <div class="artist-image">🎨</div>
+                            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Meera the Face Painter</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Artistic face painter who transforms faces into beautiful works of art. Expert in 
+                                themed designs, glitter art, and child-friendly quick designs.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 10px;">
+                                <strong style="color: var(--primary-dark);">Specialties:</strong>
+                                <br>• Face Painting • Glitter Art • Themed Designs • Body Art
+                            </div>
+                        </div>
+                        
+                        <div class="card artist-card">
+                            <div class="artist-image">🎪</div>
+                            <h3 style="color: var(--primary-dark); margin-bottom: 1rem;">Team Peeka Boo</h3>
+                            <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.6;">
+                                Our amazing support team of decorators, coordinators, and activity specialists 
+                                who work behind the scenes to make every event perfect.
+                            </p>
+                            <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 10px;">
+                                <strong style="color: var(--primary-dark);">Specialties:</strong>
+                                <br>• Event Coordination • Decoration Setup • Activity Management • Guest Care
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 3rem;">
+                        <div class="card" style="background: var(--card-gradient); padding: 2.5rem; border: 3px solid var(--primary-color);">
+                            <h3 style="color: var(--primary-dark); font-size: 2rem; margin-bottom: 1.5rem;">🌟 Book Our Artists for Your Event</h3>
+                            <p style="margin: 1.5rem 0; color: #666; line-height: 1.8; font-size: 1.1rem;">
+                                Each of our artists brings years of experience and genuine passion for entertainment. 
+                                Mix and match performers or book complete packages for unforgettable celebrations! 🎊
+                            </p>
+                            <a href="#contact" class="btn">
+                                🎭 Book Our Artists Now! 🎭
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Gallery Page -->
+        <div id="gallery-page" class="page hidden">
+            <section class="section">
+                <div class="container">
+                    <h1 class="text-center" style="font-size: 3rem; margin-bottom: 2rem;">📸 Our Event Gallery</h1>
+                    <p class="text-center" style="font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                        Capturing the joy and magic of our celebrations ✨
+                    </p>
+                    
+                    <div class="grid grid-3">
+                        <div class="card gallery-item">
+                            <video 
+                                autoplay 
+                                muted 
+                                loop 
+                                preload="metadata"
+                                style="width: 100%; height: 250px; border-radius: 20px 20px 0 0;"
+                            >
+                                <source src="https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit HB1.mp4" type="video/mp4">
+                                <div style="width: 100%; height: 250px; background: linear-gradient(135deg, var(--success-color), #228B22); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-direction: column; gap: 10px;">
+                                    <div style="font-size: 2rem;">🎬</div>
+                                    <div>Video Loading...</div>
+                                </div>
+                            </video>
+                            <div style="padding: 1.5rem;">
+                                <h4 style="margin-bottom: 0.5rem; color: var(--primary-dark); font-weight: 700;">🎬 Birthday Party</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Birthday celebration highlights with Ajit - Full of joy and magical moments! 🎉</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card gallery-item">
+                            <video 
+                                autoplay 
+                                muted 
+                                loop 
+                                preload="metadata"
+                                style="width: 100%; height: 250px; border-radius: 20px 20px 0 0;"
+                            >
+                                <source src="https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit HB2.mp4" type="video/mp4">
+                                <div style="width: 100%; height: 250px; background: linear-gradient(135deg, var(--success-color), #228B22); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-direction: column; gap: 10px;">
+                                    <div style="font-size: 2rem;">🎬</div>
+                                    <div>Video Loading...</div>
+                                </div>
+                            </video>
+                            <div style="padding: 1.5rem;">
+                                <h4 style="margin-bottom: 0.5rem; color: var(--primary-dark); font-weight: 700;">🎬 Ajit HB2.mp4</h4>
+                                <p style="color: #666; font-size: 0.9rem;">More birthday celebration moments filled with laughter and happiness! 🎊</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card gallery-item">
+                            <img 
+                                src="https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit Image1.jpeg" 
+                                alt="Ajit - Founder of Peeka Boo Events"
+                                style="width: 100%; height: 250px; object-fit: cover; border-radius: 20px 20px 0 0;"
+                                onerror="this.style.background='linear-gradient(135deg, var(--accent-color), #FFA500)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontWeight='bold'; this.style.flexDirection='column'; this.style.gap='10px'; this.innerHTML='<div style=\'font-size: 2rem;\'>🎊</div><div>Image Loading...</div>';"
+                            >
+                            <div style="padding: 1.5rem;">
+                                <h4 style="margin-bottom: 0.5rem; color: var(--primary-dark); font-weight: 700;">📸 Ajit - Our Founder</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Meet Ajit, the passionate founder of Peeka Boo Events - Creating magical celebrations! 🎨</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card gallery-item">
+                            <img 
+                                src="https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit Image2.jpeg" 
+                                alt="Peeka Boo Event Setup"
+                                style="width: 100%; height: 250px; object-fit: cover; border-radius: 20px 20px 0 0;"
+                                onerror="this.style.background='linear-gradient(135deg, var(--secondary-color), #8A2BE2)'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontWeight='bold'; this.style.flexDirection='column'; this.style.gap='10px'; this.innerHTML='<div style=\'font-size: 2rem;\'>🎊</div><div>Image Loading...</div>';"
+                            >
+                            <div style="padding: 1.5rem;">
+                                <h4 style="margin-bottom: 0.5rem; color: var(--primary-dark); font-weight: 700;">📸 Event Setup Magic</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Magical celebration setup and decorations that create unforgettable memories! ✨</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card gallery-item">
+                            <img 
+                                src="https://strdevajiteastus001.blob.core.windows.net/ajitem/resources/Ajit Image3.jpeg" 
+                                alt="Peeka Boo Professional Event Management"
+                                style="width: 100%; height: 250px; object-fit: cover; border-radius: 20px 20px 0 0;"
+                                onerror="this.style.background='linear-gradient(135deg, var(--primary-color), var(--primary-dark))'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontWeight='bold'; this.style.flexDirection='column'; this.style.gap='10px'; this.innerHTML='<div style=\'font-size: 2rem;\'>🎊</div><div>Image Loading...</div>';"
+                            >
+                            <div style="padding: 1.5rem;">
+                                <h4 style="margin-bottom: 0.5rem; color: var(--primary-dark); font-weight: 700;">📸 Professional Management</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Professional event management in action - Creating joy and celebration! 🎉</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center" style="margin-top: 3rem;">
+                        <div class="card" style="background: var(--card-gradient); padding: 2.5rem;">
+                            <h3 style="color: var(--primary-dark); font-size: 2rem; margin-bottom: 1.5rem;">📱 Share Your Magical Moments</h3>
+                            <p style="margin: 1.5rem 0; color: #666; line-height: 1.8; font-size: 1.1rem;">
+                                We love seeing the joy on our clients' faces! Share your event photos with us and 
+                                let's celebrate together. Tag us on social media to be featured in our gallery! 🌈
+                            </p>
+                            <a href="#contact" class="btn">
+                                🎊 Get Your Event Featured! 🎊
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact-page" class="page hidden">
+            <section class="section">
+                <div class="container">
+                    <h1 class="text-center" style="font-size: 3rem; margin-bottom: 2rem;">📞 Get in Touch</h1>
+                    <p class="text-center" style="font-size: 1.2rem; color: #666; margin-bottom: 3rem;">
+                        Ready to plan your perfect celebration? Let's make it happen together! ✨
+                    </p>
+                    
+                    <div class="grid grid-3">
+                        <div class="card contact-card" style="padding: 2.5rem;">
+                            <div class="big-emoji" style="margin-bottom: 1rem;">📱</div>
+                            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">Call Us</h3>
+                            <p style="font-size: 1.3rem; margin: 1rem 0; font-weight: 600; color: #FFE4E1;">+91 98211 48631</p>
+                            <p style="opacity: 0.9; margin-bottom: 1.5rem;">Available 9 AM - 9 PM</p>
+                            <a 
+                                href="tel:+919821148631"
+                                class="btn"
+                                style="background: rgba(255,255,255,0.2); color: white;"
+                            >
+                                📞 Call Now
+                            </a>
+                        </div>
+                        
+                        <div class="card contact-card" style="padding: 2.5rem;">
+                            <div class="big-emoji" style="margin-bottom: 1rem;">💬</div>
+                            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">WhatsApp</h3>
+                            <p style="font-size: 1.3rem; margin: 1rem 0; font-weight: 600; color: #FFE4E1;">+91 98211 48631</p>
+                            <p style="opacity: 0.9; margin-bottom: 1.5rem;">Quick responses guaranteed</p>
+                            <a 
+                                href="https://wa.me/919821148631?text=Hi%20Peeka%20Boo!%20I%27d%20like%20to%20plan%20an%20event"
+                                target="_blank"
+                                class="btn"
+                                style="background: rgba(255,255,255,0.2); color: white;"
+                            >
+                                💬 Chat on WhatsApp
+                            </a>
+                        </div>
+                        
+                        <div class="card contact-card" style="padding: 2.5rem;">
+                            <div class="big-emoji" style="margin-bottom: 1rem;">✉️</div>
+                            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">Email Us</h3>
+                            <p style="font-size: 1.3rem; margin: 1rem 0; font-weight: 600; color: #FFE4E1;">hello@peekabooevents.com</p>
+                            <p style="opacity: 0.9; margin-bottom: 1.5rem;">Detailed planning support</p>
+                            <a 
+                                href="mailto:hello@peekabooevents.com?subject=Event%20Planning%20Inquiry"
+                                class="btn"
+                                style="background: rgba(255,255,255,0.2); color: white;"
+                            >
+                                ✉️ Send Email
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 3rem;">
+                        <div class="card" style="background: var(--card-gradient); padding: 2.5rem;">
+                            <h3 class="text-center" style="color: var(--primary-dark); font-size: 2.2rem; margin-bottom: 1.5rem;">🎉 Let's Plan Something Amazing!</h3>
+                            <p class="text-center" style="margin: 1.5rem 0; color: #666; line-height: 1.8; font-size: 1.1rem;">
+                                Whether it's an intimate gathering or a grand celebration, Peeka Boo is here to make your 
+                                event dreams come true. Get in touch and let's start planning your perfect celebration! 🌟
+                            </p>
+                            
+                            <div class="grid grid-4" style="margin-top: 2rem;">
+                                <div class="text-center" style="padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎂</div>
+                                    <p style="font-weight: 600; color: var(--primary-dark);">Birthday Parties</p>
+                                </div>
+                                <div class="text-center" style="padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">👰</div>
+                                    <p style="font-weight: 600; color: var(--primary-dark);">Weddings</p>
+                                </div>
+                                <div class="text-center" style="padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💕</div>
+                                    <p style="font-weight: 600; color: var(--primary-dark);">Anniversaries</p>
+                                </div>
+                                <div class="text-center" style="padding: 1rem; background: rgba(255,255,255,0.5); border-radius: 15px;">
+                                    <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🤝</div>
+                                    <p style="font-weight: 600; color: var(--primary-dark);">Get-togethers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Package Display Modal -->
+    <div id="packageModal" class="package-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle" style="margin: 0; color: white;"></h3>
+                <button class="modal-close" onclick="closePackageModal()">×</button>
+            </div>
+            <div id="modalContent" class="modal-body">
+                <!-- Package content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Basket Modal -->
+    <div id="basketModal" class="basket-modal">
+        <div class="basket-content">
+            <div class="basket-header">
+                <h3 style="margin: 0; color: white;">🛒 Your Order Basket</h3>
+                <button class="modal-close" onclick="closeBasket()">×</button>
+            </div>
+            <div id="basketItems" style="min-height: 200px;">
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <div style="font-size: 3rem; margin-bottom: 15px;">🛒</div>
+                    <p>Your basket is empty</p>
+                    <p style="font-size: 0.9rem;">Add services to start building your perfect event!</p>
+                </div>
+            </div>
+            <div class="basket-total" id="basketTotal" style="display: none;">
+                <div class="total-amount" id="totalAmount">Total: ₹0</div>
+                <button class="btn" onclick="sendToWhatsApp()" style="width: 100%; margin-top: 10px;">
+                    💬 Send Order to WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p style="font-size: 1rem;">© 2025 Peeka Boo Events. All rights reserved. | Bringing Joy to Every Celebration 🎊</p>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="AjitEM006_07_script.js"></script>
+</body>
+</html>
