@@ -1,8 +1,6 @@
 const BASE_URL =
-  typeof import.meta !== "undefined" &&
-  import.meta.env &&
-  typeof import.meta.env.BASE_URL === "string"
-    ? import.meta.env.BASE_URL
+  (typeof window !== "undefined" && window.__legacyBaseUrl)
+    ? window.__legacyBaseUrl
     : "/";
 
 const NORMALIZED_BASE_URL =
@@ -14,11 +12,41 @@ function resolveMediaUrl(path) {
   if (!path) {
     return path;
   }
-  const relative = path.replace(/^\/media\//, "").replace(/^\/+/, "");
-  const encoded = relative
+
+  if (/^(?:[a-z]+:|\/\/)/i.test(path)) {
+    return path;
+  }
+
+  if (path.startsWith(MEDIA_BASE_PATH)) {
+    return path;
+  }
+
+  let normalized = path;
+
+  if (normalized.startsWith("/")) {
+    normalized = normalized.slice(1);
+  }
+
+  const baseWithoutLeadingSlash = NORMALIZED_BASE_URL.replace(/^\/+/, "");
+  if (
+    baseWithoutLeadingSlash &&
+    normalized.startsWith(`${baseWithoutLeadingSlash}/`)
+  ) {
+    normalized = normalized.slice(baseWithoutLeadingSlash.length + 1);
+  }
+
+  if (normalized.startsWith("media/")) {
+    normalized = normalized.slice("media/".length);
+  }
+
+  normalized = normalized.replace(/^\/+/, "");
+
+  const encoded = normalized
     .split("/")
+    .filter(Boolean)
     .map((segment) => encodeURIComponent(segment))
     .join("/");
+
   return `${MEDIA_BASE_PATH}${encoded}`.replace(/\/{2,}/g, "/");
 }
 
@@ -29,11 +57,7 @@ function toMediaPath(path) {
   if (Array.isArray(path)) {
     return path.map(toMediaPath);
   }
-  if (path.startsWith("/media/")) {
-    return resolveMediaUrl(path);
-  }
-  const trimmed = path.replace(/^\/+/, "");
-  return resolveMediaUrl(trimmed);
+  return resolveMediaUrl(path);
 }
 
 function mapMediaPaths(paths) {
@@ -51,6 +75,10 @@ function rewriteMediaReferences() {
     ['[href^="/media/"]', 'href'],
   ];
 
+  const stylePattern = /(["'(\s])\/media\//g;
+  const replaceMedia = (value) =>
+    value.replace(stylePattern, (_match, prefix) => `${prefix}${MEDIA_BASE_PATH}`);
+
   attributeTargets.forEach(([selector, attribute]) => {
     document.querySelectorAll(selector).forEach((element) => {
       const original = element.getAttribute(attribute);
@@ -63,10 +91,7 @@ function rewriteMediaReferences() {
   document.querySelectorAll('[style*="/media/"]').forEach((element) => {
     const inlineStyle = element.getAttribute('style');
     if (inlineStyle && inlineStyle.includes('/media/')) {
-      element.setAttribute(
-        'style',
-        inlineStyle.replace(/\/media\//g, MEDIA_BASE_PATH)
-      );
+      element.setAttribute('style', replaceMedia(inlineStyle));
     }
   });
 
@@ -92,13 +117,13 @@ function rewriteMediaReferences() {
       if (typeof CSSRule !== 'undefined' && rule.type === CSSRule.STYLE_RULE && rule.style) {
         const text = rule.style.cssText;
         if (text && text.includes('/media/')) {
-          rule.style.cssText = text.replace(/\/media\//g, MEDIA_BASE_PATH);
+          rule.style.cssText = replaceMedia(text);
         }
       } else if (typeof CSSRule !== 'undefined' && rule.type === CSSRule.KEYFRAMES_RULE) {
         Array.from(rule.cssRules || []).forEach((keyframe) => {
           const frameText = keyframe.style && keyframe.style.cssText;
           if (frameText && frameText.includes('/media/')) {
-            keyframe.style.cssText = frameText.replace(/\/media\//g, MEDIA_BASE_PATH);
+            keyframe.style.cssText = replaceMedia(frameText);
           }
         });
       }

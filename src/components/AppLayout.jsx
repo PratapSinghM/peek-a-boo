@@ -4,6 +4,14 @@ import legacyScript from "../legacy/legacyScript.js?raw";
 
 export function AppLayout() {
   useEffect(() => {
+    const baseUrl = import.meta.env.BASE_URL || "/";
+    const withTrailingSlash = baseUrl.endsWith("/")
+      ? baseUrl
+      : `${baseUrl}/`;
+    window.__legacyBaseUrl = withTrailingSlash.startsWith("/")
+      ? withTrailingSlash
+      : `/${withTrailingSlash}`;
+
     const initializeLegacyApp = () => {
       if (window.__legacyAppInitialized) {
         return;
