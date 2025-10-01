@@ -1,4 +1,26 @@
-const MEDIA_BASE_PATH = "/media/";
+const BASE_URL =
+  typeof import.meta !== "undefined" &&
+  import.meta.env &&
+  typeof import.meta.env.BASE_URL === "string"
+    ? import.meta.env.BASE_URL
+    : "/";
+
+const NORMALIZED_BASE_URL =
+  BASE_URL === "/" ? "" : BASE_URL.replace(/\/+$/, "");
+
+const MEDIA_BASE_PATH = `${NORMALIZED_BASE_URL}/media/`.replace(/\/{2,}/g, "/");
+
+function resolveMediaUrl(path) {
+  if (!path) {
+    return path;
+  }
+  const relative = path.replace(/^\/media\//, "").replace(/^\/+/, "");
+  const encoded = relative
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+  return `${MEDIA_BASE_PATH}${encoded}`.replace(/\/{2,}/g, "/");
+}
 
 function toMediaPath(path) {
   if (!path) {
@@ -8,10 +30,10 @@ function toMediaPath(path) {
     return path.map(toMediaPath);
   }
   if (path.startsWith("/media/")) {
-    return path;
+    return resolveMediaUrl(path);
   }
-  const trimmed = path.replace(/^\//, "");
-  return MEDIA_BASE_PATH + encodeURI(trimmed);
+  const trimmed = path.replace(/^\/+/, "");
+  return resolveMediaUrl(trimmed);
 }
 
 function mapMediaPaths(paths) {
@@ -21,6 +43,68 @@ function mapMediaPaths(paths) {
   return paths.map(toMediaPath);
 }
 
+function rewriteMediaReferences() {
+  const attributeTargets = [
+    ['[src^="/media/"]', 'src'],
+    ['[data-src^="/media/"]', 'data-src'],
+    ['[poster^="/media/"]', 'poster'],
+    ['[href^="/media/"]', 'href'],
+  ];
+
+  attributeTargets.forEach(([selector, attribute]) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      const original = element.getAttribute(attribute);
+      if (original) {
+        element.setAttribute(attribute, resolveMediaUrl(original));
+      }
+    });
+  });
+
+  document.querySelectorAll('[style*="/media/"]').forEach((element) => {
+    const inlineStyle = element.getAttribute('style');
+    if (inlineStyle && inlineStyle.includes('/media/')) {
+      element.setAttribute(
+        'style',
+        inlineStyle.replace(/\/media\//g, MEDIA_BASE_PATH)
+      );
+    }
+  });
+
+  const styleSheets = Array.from(document.styleSheets || []);
+  styleSheets.forEach((sheet) => {
+    if (sheet.href && !sheet.href.startsWith(window.location.origin)) {
+      return;
+    }
+
+    let rules;
+    try {
+      rules = sheet.cssRules;
+    } catch (error) {
+      console.warn('Unable to access stylesheet for media rewrite', error);
+      return;
+    }
+
+    if (!rules) {
+      return;
+    }
+
+    Array.from(rules).forEach((rule) => {
+      if (typeof CSSRule !== 'undefined' && rule.type === CSSRule.STYLE_RULE && rule.style) {
+        const text = rule.style.cssText;
+        if (text && text.includes('/media/')) {
+          rule.style.cssText = text.replace(/\/media\//g, MEDIA_BASE_PATH);
+        }
+      } else if (typeof CSSRule !== 'undefined' && rule.type === CSSRule.KEYFRAMES_RULE) {
+        Array.from(rule.cssRules || []).forEach((keyframe) => {
+          const frameText = keyframe.style && keyframe.style.cssText;
+          if (frameText && frameText.includes('/media/')) {
+            keyframe.style.cssText = frameText.replace(/\/media\//g, MEDIA_BASE_PATH);
+          }
+        });
+      }
+    });
+  });
+}
 // Basket functionality
 let basket = [];
 let basketTotal = 0;
@@ -923,6 +1007,7 @@ window.addEventListener('resize', function() {
 
 // Initialize all functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    rewriteMediaReferences();
     // Initialize theme system
     const savedTheme = localStorage.getItem('selectedTheme') || 'purple';
     setTheme(savedTheme);
